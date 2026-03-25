@@ -11,11 +11,42 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Data_Profiling"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{7681E199-3C39-4D2A-80DF-0D282F62C9B1}">
+  DTS:VersionBuild="25"
+  DTS:VersionGUID="{EB9369DB-F2CA-4B31-B1C0-E7040584A0B5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[aircraftsP]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{D560BF8C-1D0E-43BB-AE9F-ADC6E4A6915F}"
+      DTS:ObjectName="aircraftsP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\aircraftsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[aircraftsP 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{6FE524B7-15A8-4F99-BFD6-8F6A78163B7A}"
+      DTS:ObjectName="aircraftsP 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\aircraftsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[aircraftsP 2]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{8CE6E208-2D47-427F-AFB7-6CF59F628C04}"
+      DTS:ObjectName="aircraftsP 2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\aircraftsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[airportsp]"
       DTS:CreationName="FILE"
@@ -39,6 +70,68 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[airportsp 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{8D1004E9-9270-4528-8D22-6D57A5329F04}"
+      DTS:ObjectName="airportsp 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\airportsp" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[airportsp 2]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{518A2FD2-BBB0-4221-82D8-5B6C17A87E8A}"
+      DTS:ObjectName="airportsp 2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\airportsp" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[boarding_passesP]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{8443D53E-029D-44B8-B8E3-86A002128510}"
+      DTS:ObjectName="boarding_passesP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\boarding_passesP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[boarding_passesP 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{0A08EAA5-0831-42F3-9C70-0C541D49BDA9}"
+      DTS:ObjectName="boarding_passesP 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\boarding_passesP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[bookingsP]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{BB11EACE-4C55-4893-9707-95A513502C57}"
+      DTS:ObjectName="bookingsP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\bookingsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[bookingsP 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{098C937E-329C-48E9-BC94-6D6F90CC5765}"
+      DTS:ObjectName="bookingsP 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\bookingsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
       DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
       DTS:DTSID="{6A693454-F922-4F97-8E24-997E97F060A7}"
@@ -48,23 +141,132 @@
           DTS:ConnectionString="Data Source=DESKTOP-VCO30B3\MSSQLSERVER3;Initial Catalog=Airlines_Staging;Integrated Security=True;TrustServerCertificate=True;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[flightsP]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{8D403D82-9EDE-4557-AF96-8843E9D060C3}"
+      DTS:ObjectName="flightsP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\flightsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[flightsP 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{F63D44C9-FB55-467E-B550-310A31AA8E19}"
+      DTS:ObjectName="flightsP 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\flightsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[routesP]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{38D87B9F-14E1-4D0A-847F-06DE330B769A}"
+      DTS:ObjectName="routesP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\routesP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[routesP 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{9117A76F-68A4-4F01-982B-B285A95F8BB2}"
+      DTS:ObjectName="routesP 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\routesP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[seatsP]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{E85BADA7-C1D8-48C3-B082-A037E0851589}"
+      DTS:ObjectName="seatsP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\seatsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[seatsP 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{F3FB8EC6-6754-4DC4-98AD-01D5F391080E}"
+      DTS:ObjectName="seatsP 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\seatsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ticketsP]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{6C52D769-FAE9-46E2-BD4A-73BD44C47D06}"
+      DTS:ObjectName="ticketsP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\ticketsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ticketsP 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{B0A7047A-F34F-45C2-9D99-BB9F310C862A}"
+      DTS:ObjectName="ticketsP 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\ticketsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ticket_flightsP]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{BFF96F4C-28FB-43CC-9DA2-25E29B90AD37}"
+      DTS:ObjectName="ticket_flightsP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\ticket_flightsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ticket_flightsP 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{5ABD6B74-A006-458F-A9AB-347102EA093A}"
+      DTS:ObjectName="ticket_flightsP 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\DWBI.assignment.1-IT23599604\ticket_flightsP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Data Profiling Task"
+      DTS:refId="Package\Data Profiling aircrafts"
       DTS:CreationName="Microsoft.DataProfilingTask"
       DTS:Description="Data Profiling Task"
-      DTS:DTSID="{70BFB490-10F7-446F-BF3B-9FDD1EECC33B}"
+      DTS:DTSID="{0DD7F906-BE01-4DB6-9E86-59E4DB1FF839}"
       DTS:ExecutableType="Microsoft.DataProfilingTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Data Profiling Task"
+      DTS:ObjectName="Data Profiling aircrafts"
       DTS:TaskContact="Data Profiling Task; Microsoft Corporation; SQL Server 2025; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <DataProfilingTaskData
-          Destination="airportsp">
+          Destination="aircraftsP 2"
+          OverwriteDestination="True">
           <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
 <DataProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
   <ProfileVersion>1.0</ProfileVersion>
@@ -119,6 +321,1688 @@
         <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
         <MaxNumberOfViolations>100</MaxNumberOfViolations>
       </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Profiling airports"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{70BFB490-10F7-446F-BF3B-9FDD1EECC33B}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Profiling airports"
+      DTS:TaskContact="Data Profiling Task; Microsoft Corporation; SQL Server 2025; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="airportsp 2"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAircrafts" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq3">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq3">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq3">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq3">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq3">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq3">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq4">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq4">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq4">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq4">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq4">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq4">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Profiling boarding_passes"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{450A1C74-2BC9-4AC2-8D01-02B48BC474FD}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Profiling boarding_passes"
+      DTS:TaskContact="Data Profiling Task; Microsoft Corporation; SQL Server 2025; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="boarding_passesP 1"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgAirports" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq3">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq3">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq3">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq3">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq3">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq3">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq4">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq4">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq4">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq4">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq4">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq4">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq5">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq5">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq5">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq5">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq5">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq5">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBoarding_passes" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Profiling bookings"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{9DF181C4-80CF-406B-8B4E-6D59831AA7E8}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Profiling bookings"
+      DTS:TaskContact="Data Profiling Task; Microsoft Corporation; SQL Server 2025; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="bookingsP 1"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgBookings" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Profiling flights"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{037EBA71-87D3-4CDC-8B24-2741089B6C3D}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Profiling flights"
+      DTS:TaskContact="Data Profiling Task; Microsoft Corporation; SQL Server 2025; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="flightsP 1"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgFlights" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Profiling routes"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{7622B38D-129E-468E-8B6D-157FE4A103D7}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Profiling routes"
+      DTS:TaskContact="Data Profiling Task; Microsoft Corporation; SQL Server 2025; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="routesP 1"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgRoutes" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Profiling seats"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{809BD85B-54D5-401F-9005-81DB11CDD0A9}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Profiling seats"
+      DTS:TaskContact="Data Profiling Task; Microsoft Corporation; SQL Server 2025; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="seatsP 1"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgSeats" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Profiling tickets"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{C461BE49-2F44-4620-94B5-35E15D106CB8}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Profiling tickets"
+      DTS:TaskContact="Data Profiling Task; Microsoft Corporation; SQL Server 2025; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="ticketsP 1"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTickets" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Profiling ticket_flights"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{17D3E1C9-9872-4617-8AB8-3EDC01301776}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Profiling ticket_flights"
+      DTS:TaskContact="Data Profiling Task; Microsoft Corporation; SQL Server 2025; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="ticket_flightsP 1"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq1">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <ColumnPatternProfileRequest ID="PatternReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <Column IsWildCard="true" />
+        <MaxNumberOfPatterns>10</MaxNumberOfPatterns>
+        <PercentageDataCoverageDesired>95</PercentageDataCoverageDesired>
+        <CaseSensitive>false</CaseSensitive>
+        <Delimiters> \t\r\n</Delimiters>
+        <Symbols>,.;:-"'`~=&amp;/\\@!?()&lt;&gt;[]{}|#*^%</Symbols>
+        <TagTableName />
+      </ColumnPatternProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq2">
+        <DataSourceID>{6A693454-F922-4F97-8E24-997E97F060A7}</DataSourceID>
+        <Table Schema="dbo" Table="StgTicket_flights" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
     </Requests>
   </DataProfileInput>
   <DataProfileOutput>
@@ -129,6 +2013,72 @@
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{12F268CF-63A5-4164-B1A4-EE1D9E582FBF}"
+      DTS:From="Package\Data Profiling bookings"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Profiling tickets" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{32BC3988-2663-4C8C-BEE5-6C496EC171A1}"
+      DTS:From="Package\Data Profiling tickets"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Data Profiling ticket_flights" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{8880E8DD-0FAE-4DA7-9B76-B2AA8D6BA3E5}"
+      DTS:From="Package\Data Profiling ticket_flights"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Data Profiling boarding_passes" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{4DA06203-955C-4227-B93F-C2675B5BAD41}"
+      DTS:From="Package\Data Profiling boarding_passes"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Data Profiling routes" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{B534BDFA-EA04-40F8-8DA0-FB01526ED730}"
+      DTS:From="Package\Data Profiling routes"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Data Profiling flights" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{9FA3C1D1-3FCF-4463-AED3-46935F58B687}"
+      DTS:From="Package\Data Profiling flights"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Data Profiling airports" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{DB5E3372-FBCE-4DB6-8A94-FEE3FF4A1DFE}"
+      DTS:From="Package\Data Profiling airports"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Data Profiling aircrafts" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{5A3C5A23-9162-4D4A-9269-A2A63031E356}"
+      DTS:From="Package\Data Profiling aircrafts"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Data Profiling seats" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -140,11 +2090,315 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="166.4,41.6"
-          Id="Package\Data Profiling Task"
-          TopLeft="274.999984974663,74.5333328150378" />
+          Size="178.4,41.6"
+          Id="Package\Data Profiling airports"
+          TopLeft="393.333311842548,413.399997125268" />
+        <NodeLayout
+          Size="223.2,41.6"
+          Id="Package\Data Profiling boarding_passes"
+          TopLeft="181.666656740838,202.799998589754" />
+        <NodeLayout
+          Size="185.6,41.6"
+          Id="Package\Data Profiling bookings"
+          TopLeft="14.1666658926342,4.33333330319989" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Data Profiling flights"
+          TopLeft="338.333314847616,346.66666425599" />
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\Data Profiling routes"
+          TopLeft="291.666650730703,278.199998065432" />
+        <NodeLayout
+          Size="200.8,41.6"
+          Id="Package\Data Profiling ticket_flights"
+          TopLeft="120.833326731291,134.333332399196" />
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\Data Profiling tickets"
+          TopLeft="80.833328916795,70.1999995118379" />
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\Data Profiling aircrafts"
+          TopLeft="456.666641715501,485.333329958386" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Data Profiling seats"
+          TopLeft="564.999969129763,554.666662809584" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="106.966665892634,45.9333333031999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="60.2666630241608,24.2666662086381"
+              Start="0,0"
+              End="60.2666630241608,16.7666662086381">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.13333310431903" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.13333310431903"
+                    Point2="0,12.133333104319"
+                    Point3="4,12.133333104319" />
+                  <mssgle:LineSegment
+                    End="56.2666630241608,12.133333104319" />
+                  <mssgle:CubicBezierSegment
+                    Point1="56.2666630241608,12.133333104319"
+                    Point2="60.2666630241608,12.133333104319"
+                    Point3="60.2666630241608,16.133333104319" />
+                  <mssgle:LineSegment
+                    End="60.2666630241608,16.7666662086381" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="167.233328916795,111.799999511838">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="53.9999978144963,22.5333328873582"
+              Start="0,0"
+              End="53.9999978144963,15.0333328873582">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,7.26666644367909" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,7.26666644367909"
+                    Point2="0,11.2666664436791"
+                    Point3="4,11.2666664436791" />
+                  <mssgle:LineSegment
+                    End="49.9999978144963,11.2666664436791" />
+                  <mssgle:CubicBezierSegment
+                    Point1="49.9999978144963,11.2666664436791"
+                    Point2="53.9999978144963,11.2666664436791"
+                    Point3="53.9999978144963,15.2666664436791" />
+                  <mssgle:LineSegment
+                    End="53.9999978144963,15.0333328873582" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="221.233326731291,175.933332399196">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.0333300095467,26.8666661905579"
+              Start="0,0"
+              End="72.0333300095467,19.3666661905579">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.43333309527895" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.43333309527895"
+                    Point2="0,13.433333095279"
+                    Point3="4,13.433333095279" />
+                  <mssgle:LineSegment
+                    End="68.0333300095467,13.433333095279" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68.0333300095467,13.433333095279"
+                    Point2="72.0333300095467,13.433333095279"
+                    Point3="72.0333300095467,17.433333095279" />
+                  <mssgle:LineSegment
+                    End="72.0333300095467,19.3666661905579" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="293.266656740838,244.399998589754">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="84.7999939898652,33.7999994756779"
+              Start="0,0"
+              End="84.7999939898652,26.2999994756779">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.899999737839" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.899999737839"
+                    Point2="0,16.899999737839"
+                    Point3="4,16.899999737839" />
+                  <mssgle:LineSegment
+                    End="80.7999939898652,16.899999737839" />
+                  <mssgle:CubicBezierSegment
+                    Point1="80.7999939898652,16.899999737839"
+                    Point2="84.7999939898652,16.899999737839"
+                    Point3="84.7999939898652,20.899999737839" />
+                  <mssgle:LineSegment
+                    End="84.7999939898652,26.2999994756779" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="378.066650730703,319.799998065432">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="45.8666641169124,26.866666190558"
+              Start="0,0"
+              End="45.8666641169124,19.366666190558">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.43333309527898" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.43333309527898"
+                    Point2="0,13.433333095279"
+                    Point3="4,13.433333095279" />
+                  <mssgle:LineSegment
+                    End="41.8666641169124,13.433333095279" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41.8666641169124,13.433333095279"
+                    Point2="45.8666641169124,13.433333095279"
+                    Point3="45.8666641169124,17.433333095279" />
+                  <mssgle:LineSegment
+                    End="45.8666641169124,19.366666190558" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="423.933314847616,388.26666425599">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="58.5999969949327,25.1333328692778"
+              Start="0,0"
+              End="58.5999969949327,17.6333328692778">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.56666643463888" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.56666643463888"
+                    Point2="0,12.5666664346389"
+                    Point3="4,12.5666664346389" />
+                  <mssgle:LineSegment
+                    End="54.5999969949327,12.5666664346389" />
+                  <mssgle:CubicBezierSegment
+                    Point1="54.5999969949327,12.5666664346389"
+                    Point2="58.5999969949327,12.5666664346389"
+                    Point3="58.5999969949327,16.5666664346389" />
+                  <mssgle:LineSegment
+                    End="58.5999969949327,17.6333328692778" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="482.533311842548,454.999997125268">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="64.5333298729525,30.333332833118"
+              Start="0,0"
+              End="64.5333298729525,22.833332833118">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.166666416559" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.166666416559"
+                    Point2="0,15.166666416559"
+                    Point3="4,15.166666416559" />
+                  <mssgle:LineSegment
+                    End="60.5333298729525,15.166666416559" />
+                  <mssgle:CubicBezierSegment
+                    Point1="60.5333298729525,15.166666416559"
+                    Point2="64.5333298729525,15.166666416559"
+                    Point3="64.5333298729525,19.166666416559" />
+                  <mssgle:LineSegment
+                    End="64.5333298729525,22.833332833118" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="547.066641715501,526.933329958386">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="102.333327414262,27.7333328511983"
+              Start="0,0"
+              End="102.333327414262,20.2333328511983">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.86666642559913" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.86666642559913"
+                    Point2="0,13.8666664255991"
+                    Point3="4,13.8666664255991" />
+                  <mssgle:LineSegment
+                    End="98.3333274142617,13.8666664255991" />
+                  <mssgle:CubicBezierSegment
+                    Point1="98.3333274142617,13.8666664255991"
+                    Point2="102.333327414262,13.8666664255991"
+                    Point3="102.333327414262,17.8666664255991" />
+                  <mssgle:LineSegment
+                    End="102.333327414262,20.2333328511983" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
