@@ -1,0 +1,1674 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/26/2026 10:59:33 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-VCO30B3"
+  DTS:CreatorName="DESKTOP-VCO30B3\Janeesha Pabasara"
+  DTS:DTSID="{DE725B1E-FA65-4680-918C-5551F6F0CC72}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1010.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{6F472263-7A54-428F-818F-4B0E3736EB0E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B97725BF-6951-46A1-A01F-010D4FD37B66}"
+      DTS:ObjectName="DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-VCO30B3\MSSQLSERVER3;Initial Catalog=AirlinesDW;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{B97725BF-6951-46A1-A01F-010D4FD37B66}DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{076A821B-1404-4F30-868D-FCE4BF2B353C}"
+      DTS:ObjectName="DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-VCO30B3\MSSQLSERVER3;Initial Catalog=Airlines_Staging;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{076A821B-1404-4F30-868D-FCE4BF2B353C}DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Populate DimDate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{08716D49-84A6-4F1F-8318-E0E9167334AE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate DimDate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B97725BF-6951-46A1-A01F-010D4FD37B66}"
+          SQLTask:SqlStatementSource="IF NOT EXISTS (SELECT 1 FROM DimDate)&#xA;&#xA;BEGIN&#xA;    &#xA;  DECLARE @start DATE = '2015-01-01', @end DATE = '2030-12-31';&#xA;    &#xA;  WHILE @start &lt;= @end&#xA;   &#xA;  BEGIN&#xA;       &#xA;     INSERT INTO DimDate&#xA;        &#xA;     SELECT&#xA;&#xA;            CONVERT(INT, FORMAT(@start, 'yyyyMMdd')),&#xA;                            @start,&#xA;&#xA;            YEAR(@start),&#xA;&#xA;            DATEPART(QUARTER, @start),&#xA;&#xA;            MONTH(@start),&#xA;&#xA;            DATENAME(MONTH, @start),&#xA;&#xA;            DATEPART(WEEK, @start),&#xA;&#xA;            DAY(@start),&#xA;&#xA;            DATENAME(WEEKDAY, @start),&#xA;&#xA;            CASE WHEN DATEPART(WEEKDAY, @start) IN (1,7)             THEN 1 ELSE 0 END;&#xA;&#xA;        SET @start = DATEADD(DAY, 1, @start);&#xA;&#xA;    END&#xA;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Transform and Load DimAircraft"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{12747F6F-65E0-41A5-BC67-B5FC8C1F11C6}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Transform and Load DimAircraft"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Extract from StgAircrafts"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[StgAircrafts]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].Columns[aircraft_code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].ExternalColumns[aircraft_code]"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].Columns[aircraft_code]"
+                      name="aircraft_code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].Columns[model]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].ExternalColumns[model]"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].Columns[model]"
+                      name="model"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].Columns[range]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].ExternalColumns[range]"
+                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].Columns[range]"
+                      name="range"
+                      precision="18"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].ExternalColumns[aircraft_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="aircraft_code" />
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].ExternalColumns[model]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="model" />
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].ExternalColumns[range]"
+                      dataType="numeric"
+                      name="range"
+                      precision="18" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Error Output].Columns[aircraft_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Error Output].Columns[aircraft_code]"
+                      name="aircraft_code" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Error Output].Columns[model]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Error Output].Columns[model]"
+                      name="model" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Error Output].Columns[range]"
+                      dataType="numeric"
+                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Error Output].Columns[range]"
+                      name="range"
+                      precision="18" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Transform and Load DimAircraft\Load DimAircraft"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Load DimAircraft"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">exec dbo.UpsertDimAircraft ?, ?, ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transform and Load DimAircraft\Load DimAircraft.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].Columns[aircraft_code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="aircraft_code"
+                      externalMetadataColumnId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].ExternalColumns[@airplane_code]"
+                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].Columns[aircraft_code]" />
+                    <inputColumn
+                      refId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].Columns[model]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="model"
+                      externalMetadataColumnId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].ExternalColumns[@model]"
+                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].Columns[model]" />
+                    <inputColumn
+                      refId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].Columns[range]"
+                      cachedDataType="numeric"
+                      cachedName="range"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].ExternalColumns[@range_km]"
+                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].Columns[range]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].ExternalColumns[@airplane_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="@airplane_code">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].ExternalColumns[@model]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="@model">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].ExternalColumns[@range_km]"
+                      dataType="i4"
+                      name="@range_km">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Transform and Load DimAircraft\Load DimAircraft.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Transform and Load DimAircraft\Load DimAircraft.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transform and Load DimAircraft\Load DimAircraft.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimAircraft\Load DimAircraft.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAircraft\Load DimAircraft.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimAircraft\Load DimAircraft.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Transform and Load DimAircraft.Paths[OLE DB Source Output]"
+              endId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input]"
+              name="OLE DB Source Output"
+              startId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Transform and Load DimAirport"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C7570033-FD7C-405C-A986-DB2BD6669291}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Transform and Load DimAirport"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Transform and Load DimAirport\Extract from StgAirports"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Extract from StgAirports"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[StgAirports]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transform and Load DimAirport\Extract from StgAirports.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[airport_code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].ExternalColumns[airport_code]"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[airport_code]"
+                      name="airport_code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[airport_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].ExternalColumns[airport_name]"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[airport_name]"
+                      name="airport_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[city]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[city]"
+                      name="city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[coordinates]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].ExternalColumns[coordinates]"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[coordinates]"
+                      name="coordinates"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[timezone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].ExternalColumns[timezone]"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[timezone]"
+                      name="timezone"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].ExternalColumns[airport_code]"
+                      dataType="wstr"
+                      length="50"
+                      name="airport_code" />
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].ExternalColumns[airport_name]"
+                      dataType="wstr"
+                      length="50"
+                      name="airport_name" />
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      dataType="wstr"
+                      length="50"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].ExternalColumns[coordinates]"
+                      dataType="wstr"
+                      length="50"
+                      name="coordinates" />
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].ExternalColumns[timezone]"
+                      dataType="wstr"
+                      length="50"
+                      name="timezone" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[airport_code]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[airport_code]"
+                      name="airport_code" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[airport_name]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[airport_name]"
+                      name="airport_name" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[city]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[city]"
+                      name="city" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[coordinates]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[coordinates]"
+                      name="coordinates" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[timezone]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[timezone]"
+                      name="timezone" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Transform and Load DimAirport\Load DimAirport"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Load DimAirport"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">exec dbo.UpsertDimAirport ?, ?, ?, ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transform and Load DimAirport\Load DimAirport.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].Columns[airport_code]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="airport_code"
+                      externalMetadataColumnId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].ExternalColumns[@airport_code]"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[airport_code]" />
+                    <inputColumn
+                      refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].Columns[airport_name]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="airport_name"
+                      externalMetadataColumnId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].ExternalColumns[@airport_name]"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[airport_name]" />
+                    <inputColumn
+                      refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].Columns[city]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="city"
+                      externalMetadataColumnId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].ExternalColumns[@city]"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[city]" />
+                    <inputColumn
+                      refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].Columns[timezone]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="timezone"
+                      externalMetadataColumnId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].ExternalColumns[@timezone]"
+                      lineageId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output].Columns[timezone]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].ExternalColumns[@airport_code]"
+                      dataType="wstr"
+                      length="50"
+                      name="@airport_code">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].ExternalColumns[@airport_name]"
+                      dataType="wstr"
+                      length="50"
+                      name="@airport_name">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].ExternalColumns[@city]"
+                      dataType="wstr"
+                      length="50"
+                      name="@city">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].ExternalColumns[@timezone]"
+                      dataType="wstr"
+                      length="50"
+                      name="@timezone">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Transform and Load DimAirport\Load DimAirport.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Transform and Load DimAirport\Load DimAirport.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Load DimAirport.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimAirport\Load DimAirport.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimAirport\Load DimAirport.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimAirport\Load DimAirport.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Transform and Load DimAirport.Paths[OLE DB Source Output]"
+              endId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input]"
+              name="OLE DB Source Output"
+              startId="Package\Transform and Load DimAirport\Extract from StgAirports.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Transform and Load DimFareConditions"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5FB75F91-9D81-4EDE-9B91-14BF3B4DAEFD}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Transform and Load DimFareConditions"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Extract Distinct Fare Conditions"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT fare_conditions,
+      
+  CASE fare_conditions
+          
+     WHEN 'Economy' THEN 1
+         
+     WHEN 'Comfort' THEN 2
+          
+     WHEN 'Business' THEN 3
+            
+     ELSE 99
+      
+  END AS fare_rank
+   
+FROM dbo.StgSeats</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Output].Columns[fare_conditions]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Output].ExternalColumns[fare_conditions]"
+                      length="50"
+                      lineageId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Output].Columns[fare_conditions]"
+                      name="fare_conditions"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Output].Columns[fare_rank]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Output].ExternalColumns[fare_rank]"
+                      lineageId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Output].Columns[fare_rank]"
+                      name="fare_rank"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Output].ExternalColumns[fare_conditions]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="fare_conditions" />
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Output].ExternalColumns[fare_rank]"
+                      dataType="i4"
+                      name="fare_rank" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Error Output].Columns[fare_conditions]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Error Output].Columns[fare_conditions]"
+                      name="fare_conditions" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Error Output].Columns[fare_rank]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Error Output].Columns[fare_rank]"
+                      name="fare_rank" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Transform and Load DimFareConditions\Load DimFareConditions"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Load DimFareConditions"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">exec dbo.UpsertDimFareConditions ?, ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Inputs[OLE DB Command Input].Columns[fare_conditions]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="fare_conditions"
+                      externalMetadataColumnId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Inputs[OLE DB Command Input].ExternalColumns[@fare_conditions]"
+                      lineageId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Output].Columns[fare_conditions]" />
+                    <inputColumn
+                      refId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Inputs[OLE DB Command Input].Columns[fare_rank]"
+                      cachedDataType="i4"
+                      cachedName="fare_rank"
+                      externalMetadataColumnId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Inputs[OLE DB Command Input].ExternalColumns[@fare_rank]"
+                      lineageId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Output].Columns[fare_rank]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Inputs[OLE DB Command Input].ExternalColumns[@fare_conditions]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="@fare_conditions">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Inputs[OLE DB Command Input].ExternalColumns[@fare_rank]"
+                      dataType="i4"
+                      name="@fare_rank">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Transform and Load DimFareConditions.Paths[OLE DB Source Output]"
+              endId="Package\Transform and Load DimFareConditions\Load DimFareConditions.Inputs[OLE DB Command Input]"
+              name="OLE DB Source Output"
+              startId="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Transform and Load DimPassenger"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7639E4DB-7EA4-4DC3-AAAF-54A0B757236A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Transform and Load DimPassenger"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Transform and Load DimPassenger\Extract from StgTickets"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Extract from StgTickets"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[StgTickets]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[ticket_no]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[ticket_no]"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[ticket_no]"
+                      name="ticket_no"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[book_ref]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[book_ref]"
+                      length="50"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[book_ref]"
+                      name="book_ref"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[passenger_id]"
+                      length="50"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_id]"
+                      name="passenger_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[passenger_name]"
+                      length="50"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_name]"
+                      name="passenger_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[contact_data]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[contact_data]"
+                      length="100"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[contact_data]"
+                      name="contact_data"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[ticket_no]"
+                      dataType="i8"
+                      name="ticket_no" />
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[book_ref]"
+                      dataType="wstr"
+                      length="50"
+                      name="book_ref" />
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[passenger_id]"
+                      dataType="wstr"
+                      length="50"
+                      name="passenger_id" />
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[passenger_name]"
+                      dataType="wstr"
+                      length="50"
+                      name="passenger_name" />
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[contact_data]"
+                      dataType="wstr"
+                      length="100"
+                      name="contact_data" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[ticket_no]"
+                      dataType="i8"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[ticket_no]"
+                      name="ticket_no" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[book_ref]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[book_ref]"
+                      name="book_ref" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[passenger_id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[passenger_id]"
+                      name="passenger_id" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[passenger_name]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[passenger_name]"
+                      name="passenger_name" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[contact_data]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[contact_data]"
+                      name="contact_data" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Transform and Load DimPassenger\Load DimPassenger"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Load DimPassenger"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">exec dbo.UpsertDimPassenger ?, ?, ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Transform and Load DimPassenger\Load DimPassenger.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input].Columns[passenger_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="passenger_id"
+                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input].ExternalColumns[@passenger_id]"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_id]" />
+                    <inputColumn
+                      refId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input].Columns[passenger_name]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="passenger_name"
+                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input].ExternalColumns[@passenger_name]"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_name]" />
+                    <inputColumn
+                      refId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input].Columns[contact_data]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="contact_data"
+                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input].ExternalColumns[@contact_data]"
+                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[contact_data]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input].ExternalColumns[@passenger_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="@passenger_id">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input].ExternalColumns[@passenger_name]"
+                      dataType="wstr"
+                      length="200"
+                      name="@passenger_name">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input].ExternalColumns[@contact_data]"
+                      dataType="wstr"
+                      length="100"
+                      name="@contact_data">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Transform and Load DimPassenger\Load DimPassenger.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Transform and Load DimPassenger\Load DimPassenger.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Load DimPassenger.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimPassenger\Load DimPassenger.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Load DimPassenger.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Transform and Load DimPassenger\Load DimPassenger.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Transform and Load DimPassenger.Paths[OLE DB Source Output]"
+              endId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input]"
+              name="OLE DB Source Output"
+              startId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Populate DimDate"
+          TopLeft="55.8333302827345,19.066666534079" />
+        <NodeLayout
+          Size="226.4,41.6"
+          Id="Package\Transform and Load DimAircraft"
+          TopLeft="216.666654828522,80.5999994395176" />
+        <NodeLayout
+          Size="224,41.6"
+          Id="Package\Transform and Load DimAirport"
+          TopLeft="306.66664991114,138.666665702396" />
+        <NodeLayout
+          Size="264,41.6"
+          Id="Package\Transform and Load DimFareConditions"
+          TopLeft="248.333319764999,220.999998463194" />
+        <NodeLayout
+          Size="243.2,41.6"
+          Id="Package\Transform and Load DimPassenger"
+          TopLeft="199.16665578468,287.733331332472" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Transform and Load DimAircraft">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="191.2,41.6"
+          Id="Package\Transform and Load DimAircraft\Extract from StgAircrafts"
+          TopLeft="269.166651960049,101.399999294877" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Transform and Load DimAircraft\Load DimAircraft"
+          TopLeft="335.83331498421,203.666665250394" />
+        <EdgeLayout
+          Id="Package\Transform and Load DimAircraft.Paths[OLE DB Source Output]"
+          TopLeft="364.766651960049,142.999999294877">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="49.0666630241608,60.666665955517"
+              Start="0,0"
+              End="49.0666630241608,53.166665955517">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.3333329777585" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.3333329777585"
+                    Point2="0,30.3333329777585"
+                    Point3="4,30.3333329777585" />
+                  <mssgle:LineSegment
+                    End="45.0666630241608,30.3333329777585" />
+                  <mssgle:CubicBezierSegment
+                    Point1="45.0666630241608,30.3333329777585"
+                    Point2="49.0666630241608,30.3333329777585"
+                    Point3="49.0666630241608,34.3333329777585" />
+                  <mssgle:LineSegment
+                    End="49.0666630241608,53.166665955517" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform and Load DimAircraft\Extract from StgAircrafts">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Transform and Load DimAirport">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="188.8,41.6"
+          Id="Package\Transform and Load DimAirport\Extract from StgAirports"
+          TopLeft="341.999994903803,81.9999987781048" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Transform and Load DimAirport\Load DimAirport"
+          TopLeft="470.999992981553,184.999997243285" />
+        <EdgeLayout
+          Id="Package\Transform and Load DimAirport.Paths[OLE DB Source Output]"
+          TopLeft="436.399994903803,123.599998778105">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="111.39999807775,61.3999984651804"
+              Start="0,0"
+              End="111.39999807775,53.8999984651804">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.6999992325902" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.6999992325902"
+                    Point2="0,30.6999992325902"
+                    Point3="4,30.6999992325902" />
+                  <mssgle:LineSegment
+                    End="107.39999807775,30.6999992325902" />
+                  <mssgle:CubicBezierSegment
+                    Point1="107.39999807775,30.6999992325902"
+                    Point2="111.39999807775,30.6999992325902"
+                    Point3="111.39999807775,34.6999992325902" />
+                  <mssgle:LineSegment
+                    End="111.39999807775,53.8999984651804" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform and Load DimAirport\Extract from StgAirports">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Transform and Load DimFareConditions">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="224,41.6"
+          Id="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions"
+          TopLeft="292.99999563396,76.9999988526106" />
+        <NodeLayout
+          Size="193.6,41.6"
+          Id="Package\Transform and Load DimFareConditions\Load DimFareConditions"
+          TopLeft="406.999993935228,182.999997273088" />
+        <EdgeLayout
+          Id="Package\Transform and Load DimFareConditions.Paths[OLE DB Source Output]"
+          TopLeft="404.99999563396,118.599998852611">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="98.7999983012677,64.3999984204769"
+              Start="0,0"
+              End="98.7999983012677,56.8999984204769">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.1999992102385" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.1999992102385"
+                    Point2="0,32.1999992102385"
+                    Point3="4,32.1999992102385" />
+                  <mssgle:LineSegment
+                    End="94.7999983012677,32.1999992102385" />
+                  <mssgle:CubicBezierSegment
+                    Point1="94.7999983012677,32.1999992102385"
+                    Point2="98.7999983012677,32.1999992102385"
+                    Point3="98.7999983012677,36.1999992102385" />
+                  <mssgle:LineSegment
+                    End="98.7999983012677,56.8999984204769" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Transform and Load DimPassenger">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="185.6,41.6"
+          Id="Package\Transform and Load DimPassenger\Extract from StgTickets"
+          TopLeft="200.833322360284,71.066666172478" />
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\Transform and Load DimPassenger\Load DimPassenger"
+          TopLeft="325.833315530586,202.799998589754" />
+        <EdgeLayout
+          Id="Package\Transform and Load DimPassenger.Paths[OLE DB Source Output]"
+          TopLeft="293.633322360284,112.666666172478">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="118.599993170301,90.1333324172762"
+              Start="0,0"
+              End="118.599993170301,82.6333324172762">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.0666662086381" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.0666662086381"
+                    Point2="0,45.0666662086381"
+                    Point3="4,45.0666662086381" />
+                  <mssgle:LineSegment
+                    End="114.599993170301,45.0666662086381" />
+                  <mssgle:CubicBezierSegment
+                    Point1="114.599993170301,45.0666662086381"
+                    Point2="118.599993170301,45.0666662086381"
+                    Point3="118.599993170301,49.0666662086381" />
+                  <mssgle:LineSegment
+                    End="118.599993170301,82.6333324172762" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform and Load DimPassenger\Extract from StgTickets">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
