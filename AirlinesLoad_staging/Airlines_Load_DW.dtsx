@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{6F472263-7A54-428F-818F-4B0E3736EB0E}">
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{EC553863-6705-4FB7-BA93-B939BA8046F1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -272,6 +272,13 @@
                   name="OLE DB Command Input">
                   <inputColumns>
                     <inputColumn
+                      refId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].Columns[range]"
+                      cachedDataType="numeric"
+                      cachedName="range"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].ExternalColumns[@range_km]"
+                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].Columns[range]" />
+                    <inputColumn
                       refId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].Columns[aircraft_code]"
                       cachedCodepage="1252"
                       cachedDataType="str"
@@ -287,13 +294,6 @@
                       cachedName="model"
                       externalMetadataColumnId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].ExternalColumns[@model]"
                       lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].Columns[model]" />
-                    <inputColumn
-                      refId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].Columns[range]"
-                      cachedDataType="numeric"
-                      cachedName="range"
-                      cachedPrecision="18"
-                      externalMetadataColumnId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].ExternalColumns[@range_km]"
-                      lineageId="Package\Transform and Load DimAircraft\Extract from StgAircrafts.Outputs[OLE DB Source Output].Columns[range]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -301,7 +301,7 @@
                       refId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].ExternalColumns[@airplane_code]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="3"
                       name="@airplane_code">
                       <properties>
                         <property
@@ -314,7 +314,7 @@
                       refId="Package\Transform and Load DimAircraft\Load DimAircraft.Inputs[OLE DB Command Input].ExternalColumns[@model]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="100"
                       name="@model">
                       <properties>
                         <property
@@ -661,7 +661,7 @@
                     <externalMetadataColumn
                       refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].ExternalColumns[@airport_code]"
                       dataType="wstr"
-                      length="50"
+                      length="3"
                       name="@airport_code">
                       <properties>
                         <property
@@ -673,7 +673,7 @@
                     <externalMetadataColumn
                       refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].ExternalColumns[@airport_name]"
                       dataType="wstr"
-                      length="50"
+                      length="200"
                       name="@airport_name">
                       <properties>
                         <property
@@ -685,7 +685,7 @@
                     <externalMetadataColumn
                       refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].ExternalColumns[@city]"
                       dataType="wstr"
-                      length="50"
+                      length="100"
                       name="@city">
                       <properties>
                         <property
@@ -697,7 +697,7 @@
                     <externalMetadataColumn
                       refId="Package\Transform and Load DimAirport\Load DimAirport.Inputs[OLE DB Command Input].ExternalColumns[@timezone]"
                       dataType="wstr"
-                      length="50"
+                      length="100"
                       name="@timezone">
                       <properties>
                         <property
@@ -1307,7 +1307,8 @@ FROM dbo.StgSeats</property>
                     isUsed="True">
                     <externalMetadataColumn
                       refId="Package\Transform and Load DimPassenger\Load DimPassenger.Inputs[OLE DB Command Input].ExternalColumns[@passenger_id]"
-                      dataType="wstr"
+                      codePage="1252"
+                      dataType="str"
                       length="20"
                       name="@passenger_id">
                       <properties>
@@ -1429,39 +1430,39 @@ FROM dbo.StgSeats</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="156,41.6"
+          Id="Package\Transform and Load DimAircraft\Load DimAircraft"
+          TopLeft="352.999984011055,252.533330782519" />
+        <NodeLayout
           Size="191.2,41.6"
           Id="Package\Transform and Load DimAircraft\Extract from StgAircrafts"
           TopLeft="269.166651960049,101.399999294877" />
-        <NodeLayout
-          Size="156,41.6"
-          Id="Package\Transform and Load DimAircraft\Load DimAircraft"
-          TopLeft="335.83331498421,203.666665250394" />
         <EdgeLayout
           Id="Package\Transform and Load DimAircraft.Paths[OLE DB Source Output]"
           TopLeft="364.766651960049,142.999999294877">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="49.0666630241608,60.666665955517"
+              EndConnector="66.2333320510063,109.533331487642"
               Start="0,0"
-              End="49.0666630241608,53.166665955517">
+              End="66.2333320510063,102.033331487642">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26.3333329777585" />
+                    End="0,50.7666657438212" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,26.3333329777585"
-                    Point2="0,30.3333329777585"
-                    Point3="4,30.3333329777585" />
+                    Point1="0,50.7666657438212"
+                    Point2="0,54.7666657438212"
+                    Point3="4,54.7666657438212" />
                   <mssgle:LineSegment
-                    End="45.0666630241608,30.3333329777585" />
+                    End="62.2333320510063,54.7666657438212" />
                   <mssgle:CubicBezierSegment
-                    Point1="45.0666630241608,30.3333329777585"
-                    Point2="49.0666630241608,30.3333329777585"
-                    Point3="49.0666630241608,34.3333329777585" />
+                    Point1="62.2333320510063,54.7666657438212"
+                    Point2="66.2333320510063,54.7666657438212"
+                    Point3="66.2333320510063,58.7666657438212" />
                   <mssgle:LineSegment
-                    End="49.0666630241608,53.166665955517" />
+                    End="66.2333320510063,102.033331487642" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1492,39 +1493,39 @@ FROM dbo.StgSeats</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="188.8,41.6"
-          Id="Package\Transform and Load DimAirport\Extract from StgAirports"
-          TopLeft="341.999994903803,81.9999987781048" />
-        <NodeLayout
           Size="153.6,41.6"
           Id="Package\Transform and Load DimAirport\Load DimAirport"
           TopLeft="470.999992981553,184.999997243285" />
+        <NodeLayout
+          Size="188.8,41.6"
+          Id="Package\Transform and Load DimAirport\Extract from StgAirports"
+          TopLeft="341.999994903803,81.9999987781048" />
         <EdgeLayout
           Id="Package\Transform and Load DimAirport.Paths[OLE DB Source Output]"
           TopLeft="436.399994903803,123.599998778105">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="111.39999807775,61.3999984651804"
+              EndConnector="111.39999807775,61.3999984651802"
               Start="0,0"
-              End="111.39999807775,53.8999984651804">
+              End="111.39999807775,53.8999984651802">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26.6999992325902" />
+                    End="0,26.6999992325901" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,26.6999992325902"
-                    Point2="0,30.6999992325902"
-                    Point3="4,30.6999992325902" />
+                    Point1="0,26.6999992325901"
+                    Point2="0,30.6999992325901"
+                    Point3="4,30.6999992325901" />
                   <mssgle:LineSegment
-                    End="107.39999807775,30.6999992325902" />
+                    End="107.39999807775,30.6999992325901" />
                   <mssgle:CubicBezierSegment
-                    Point1="107.39999807775,30.6999992325902"
-                    Point2="111.39999807775,30.6999992325902"
-                    Point3="111.39999807775,34.6999992325902" />
+                    Point1="107.39999807775,30.6999992325901"
+                    Point2="111.39999807775,30.6999992325901"
+                    Point3="111.39999807775,34.6999992325901" />
                   <mssgle:LineSegment
-                    End="111.39999807775,53.8999984651804" />
+                    End="111.39999807775,53.8999984651802" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1555,13 +1556,13 @@ FROM dbo.StgSeats</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="224,41.6"
-          Id="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions"
-          TopLeft="292.99999563396,76.9999988526106" />
-        <NodeLayout
           Size="193.6,41.6"
           Id="Package\Transform and Load DimFareConditions\Load DimFareConditions"
           TopLeft="406.999993935228,182.999997273088" />
+        <NodeLayout
+          Size="224,41.6"
+          Id="Package\Transform and Load DimFareConditions\Extract Distinct Fare Conditions"
+          TopLeft="292.99999563396,76.9999988526106" />
         <EdgeLayout
           Id="Package\Transform and Load DimFareConditions.Paths[OLE DB Source Output]"
           TopLeft="404.99999563396,118.599998852611">
@@ -1613,13 +1614,13 @@ FROM dbo.StgSeats</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="185.6,41.6"
-          Id="Package\Transform and Load DimPassenger\Extract from StgTickets"
-          TopLeft="200.833322360284,71.066666172478" />
-        <NodeLayout
           Size="172.8,41.6"
           Id="Package\Transform and Load DimPassenger\Load DimPassenger"
           TopLeft="325.833315530586,202.799998589754" />
+        <NodeLayout
+          Size="185.6,41.6"
+          Id="Package\Transform and Load DimPassenger\Extract from StgTickets"
+          TopLeft="200.833322360284,71.066666172478" />
         <EdgeLayout
           Id="Package\Transform and Load DimPassenger.Paths[OLE DB Source Output]"
           TopLeft="293.633322360284,112.666666172478">
