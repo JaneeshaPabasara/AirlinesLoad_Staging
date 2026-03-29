@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="47"
-  DTS:VersionGUID="{C70B4811-C636-4582-B7C3-9FA2BC4A8A2B}">
+  DTS:VersionBuild="56"
+  DTS:VersionGUID="{51B84DEA-9FFD-4D65-BAA5-BB37DDC93621}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=DESKTOP-VCO30B3\MSSQLSERVER3;Initial Catalog=AirlinesDW;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{B97725BF-6951-46A1-A01F-010D4FD37B66}DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=DESKTOP-VCO30B3\MSSQLSERVER3;Initial Catalog=AirlinesDW;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{B97725BF-6951-46A1-A01F-010D4FD37B66}DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -37,7 +37,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=DESKTOP-VCO30B3\MSSQLSERVER3;Initial Catalog=Airlines_Staging;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{076A821B-1404-4F30-868D-FCE4BF2B353C}DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=DESKTOP-VCO30B3\MSSQLSERVER3;Initial Catalog=Airlines_Staging;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{076A821B-1404-4F30-868D-FCE4BF2B353C}DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -53,6 +53,2158 @@
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load FactFlightSegments"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{D527EF3C-6AD4-4149-B625-FAE2D2EBA3A6}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load FactFlightSegments"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load FactFlightSegments\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input].Columns[passenger_id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="passenger_id"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[passenger_id]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input].Columns[fare_conditions]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="fare_conditions"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[fare_conditions]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input].Columns[flight_status]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="flight_status"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[flight_status]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input].Columns[flight_no]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="flight_no"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[flight_no]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input].Columns[book_ref]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="book_ref"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[book_ref]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input].Columns[ticket_no]"
+                      cachedDataType="i8"
+                      cachedName="ticket_no"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[ticket_no]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input].Columns[departure_airport]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="departure_airport"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[departure_airport]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input].Columns[arrival_airport]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="arrival_airport"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[arrival_airport]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input].Columns[aircraft_code]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="aircraft_code"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[aircraft_code]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[passenger_id_conv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[passenger_id_conv]"
+                      name="passenger_id_conv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[passenger_id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[fare_conditions_conv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[fare_conditions_conv]"
+                      name="fare_conditions_conv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[fare_conditions]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[flight_status_conv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[flight_status_conv]"
+                      name="flight_status_conv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[flight_status]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[route_no_conv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[route_no_conv]"
+                      name="route_no_conv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[flight_no]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[book_ref_conv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[book_ref_conv]"
+                      name="book_ref_conv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[book_ref]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[ticket_no_conv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="13"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[ticket_no_conv]"
+                      name="ticket_no_conv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[ticket_no]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[departure_airport_conv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[departure_airport_conv]"
+                      name="departure_airport_conv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[departure_airport]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[arrival_airport_conv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[arrival_airport_conv]"
+                      name="arrival_airport_conv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[arrival_airport]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[aircraft_code_conv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[aircraft_code_conv]"
+                      name="aircraft_code_conv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[aircraft_code]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactFlightSegments\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load FactFlightSegments\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Inputs[Derived Column Input].Columns[scheduled_departure]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="scheduled_departure"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_departure]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Inputs[Derived Column Input].Columns[scheduled_arrival]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="scheduled_arrival"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_arrival]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Inputs[Derived Column Input].Columns[actual_departure]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="actual_departure"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[actual_departure]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Inputs[Derived Column Input].Columns[actual_arrival]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="actual_arrival"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[actual_arrival]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Inputs[Derived Column Input].Columns[flight_status_conv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="flight_status_conv"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[flight_status_conv]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[date_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[date_key]"
+                      name="date_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)((DT_WSTR,4)[YEAR]((DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_departure]}) + ([LEN]((DT_WSTR,2)[MONTH]((DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_departure]})) == 1 ? "0" + (DT_WSTR,2)[MONTH]((DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_departure]}) : (DT_WSTR,2)[MONTH]((DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_departure]})) + ([LEN]((DT_WSTR,2)[DAY]((DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_departure]})) == 1 ? "0" + (DT_WSTR,2)[DAY]((DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_departure]}) : (DT_WSTR,2)[DAY]((DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_departure]})))</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)((DT_WSTR,4)YEAR((DT_DBTIMESTAMP)scheduled_departure) + (LEN((DT_WSTR,2)MONTH((DT_DBTIMESTAMP)scheduled_departure)) == 1 ? "0" + (DT_WSTR,2)MONTH((DT_DBTIMESTAMP)scheduled_departure) : (DT_WSTR,2)MONTH((DT_DBTIMESTAMP)scheduled_departure)) + (LEN((DT_WSTR,2)DAY((DT_DBTIMESTAMP)scheduled_departure)) == 1 ? "0" + (DT_WSTR,2)DAY((DT_DBTIMESTAMP)scheduled_departure) : (DT_WSTR,2)DAY((DT_DBTIMESTAMP)scheduled_departure)))</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[delay_minutes]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[delay_minutes]"
+                      name="delay_minutes"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DATEDIFF]("mi",(DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_departure]},(DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[actual_departure]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DATEDIFF("mi",(DT_DBTIMESTAMP)scheduled_departure,(DT_DBTIMESTAMP)actual_departure)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[scheduled_duration_min]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[scheduled_duration_min]"
+                      name="scheduled_duration_min"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DATEDIFF]("mi",(DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_departure]},(DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_arrival]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DATEDIFF("mi",(DT_DBTIMESTAMP)scheduled_departure,(DT_DBTIMESTAMP)scheduled_arrival)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[actual_duration_min]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[actual_duration_min]"
+                      name="actual_duration_min"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DATEDIFF]("mi",(DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[actual_departure]},(DT_DBTIMESTAMP)#{Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[actual_arrival]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DATEDIFF("mi",(DT_DBTIMESTAMP)actual_departure,(DT_DBTIMESTAMP)actual_arrival)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[is_cancelled]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[is_cancelled]"
+                      name="is_cancelled"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[flight_status_conv]} == "Cancelled" ? (DT_BOOL) TRUE  : (DT_BOOL) FALSE </property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">flight_status_conv == "Cancelled" ? (DT_BOOL) TRUE  : (DT_BOOL) FALSE </property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactFlightSegments\Extract from Staging"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Extract from Staging"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    b.book_ref,
+    b.total_amount,
+    t.ticket_no,
+    t.passenger_id,
+    tf.flight_id,
+    tf.fare_conditions,
+    tf.amount            AS ticket_price,
+    f.flight_no,
+    f.status             AS flight_status,
+    f.scheduled_departure,
+    f.scheduled_arrival,
+    f.actual_departure,
+    f.actual_arrival,
+    r.departure_airport,
+    r.arrival_airport,
+    r.aircraft_code
+FROM StgTicket_flights tf
+JOIN StgTickets  t  ON tf.ticket_no  = t.ticket_no
+JOIN StgBookings b  ON t.book_ref    = b.book_ref
+JOIN StgFlights  f  ON tf.flight_id  = f.flight_id
+JOIN StgRoutes   r  ON f.flight_no    = r.flight_no</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactFlightSegments\Extract from Staging.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[ticket_no]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[ticket_no]"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[ticket_no]"
+                      name="ticket_no"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[flight_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[flight_id]"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[flight_id]"
+                      name="flight_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[flight_no]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[flight_no]"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[flight_no]"
+                      name="flight_no"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_departure]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[scheduled_departure]"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_departure]"
+                      name="scheduled_departure"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_arrival]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[scheduled_arrival]"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[scheduled_arrival]"
+                      name="scheduled_arrival"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[actual_departure]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[actual_departure]"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[actual_departure]"
+                      name="actual_departure"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[actual_arrival]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[actual_arrival]"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[actual_arrival]"
+                      name="actual_arrival"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[book_ref]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[book_ref]"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[book_ref]"
+                      name="book_ref"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[total_amount]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[total_amount]"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[total_amount]"
+                      name="total_amount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[passenger_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[passenger_id]"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[passenger_id]"
+                      name="passenger_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[fare_conditions]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[fare_conditions]"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[fare_conditions]"
+                      name="fare_conditions"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[ticket_price]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[ticket_price]"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[ticket_price]"
+                      name="ticket_price"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[flight_status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[flight_status]"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[flight_status]"
+                      name="flight_status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[departure_airport]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[departure_airport]"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[departure_airport]"
+                      name="departure_airport"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[arrival_airport]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[arrival_airport]"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[arrival_airport]"
+                      name="arrival_airport"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[aircraft_code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[aircraft_code]"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[aircraft_code]"
+                      name="aircraft_code"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[ticket_no]"
+                      dataType="i8"
+                      name="ticket_no" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[flight_id]"
+                      dataType="i4"
+                      name="flight_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[flight_no]"
+                      dataType="wstr"
+                      length="50"
+                      name="flight_no" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[scheduled_departure]"
+                      dataType="wstr"
+                      length="50"
+                      name="scheduled_departure" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[scheduled_arrival]"
+                      dataType="wstr"
+                      length="50"
+                      name="scheduled_arrival" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[actual_departure]"
+                      dataType="wstr"
+                      length="50"
+                      name="actual_departure" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[actual_arrival]"
+                      dataType="wstr"
+                      length="50"
+                      name="actual_arrival" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[book_ref]"
+                      dataType="wstr"
+                      length="50"
+                      name="book_ref" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[total_amount]"
+                      dataType="r8"
+                      name="total_amount" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[passenger_id]"
+                      dataType="wstr"
+                      length="50"
+                      name="passenger_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[fare_conditions]"
+                      dataType="wstr"
+                      length="50"
+                      name="fare_conditions" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[ticket_price]"
+                      dataType="r8"
+                      name="ticket_price" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[flight_status]"
+                      dataType="wstr"
+                      length="50"
+                      name="flight_status" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[departure_airport]"
+                      dataType="wstr"
+                      length="50"
+                      name="departure_airport" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[arrival_airport]"
+                      dataType="wstr"
+                      length="50"
+                      name="arrival_airport" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].ExternalColumns[aircraft_code]"
+                      dataType="wstr"
+                      length="50"
+                      name="aircraft_code" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[book_ref]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[book_ref]"
+                      name="book_ref" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[total_amount]"
+                      dataType="r8"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[total_amount]"
+                      name="total_amount" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[ticket_no]"
+                      dataType="i8"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[ticket_no]"
+                      name="ticket_no" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[passenger_id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[passenger_id]"
+                      name="passenger_id" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[flight_id]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[flight_id]"
+                      name="flight_id" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[fare_conditions]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[fare_conditions]"
+                      name="fare_conditions" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[ticket_price]"
+                      dataType="r8"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[ticket_price]"
+                      name="ticket_price" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[flight_no]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[flight_no]"
+                      name="flight_no" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[flight_status]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[flight_status]"
+                      name="flight_status" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[scheduled_departure]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[scheduled_departure]"
+                      name="scheduled_departure" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[scheduled_arrival]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[scheduled_arrival]"
+                      name="scheduled_arrival" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[actual_departure]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[actual_departure]"
+                      name="actual_departure" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[actual_arrival]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[actual_arrival]"
+                      name="actual_arrival" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[departure_airport]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[departure_airport]"
+                      name="departure_airport" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[arrival_airport]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[arrival_airport]"
+                      name="arrival_airport" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[aircraft_code]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[aircraft_code]"
+                      name="aircraft_code" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactFlightSegments\Insert into FactFlightSegments"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into FactFlightSegments"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactFlightSegments]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[date_key]"
+                      cachedDataType="i4"
+                      cachedName="date_key"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[date_key]"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[date_key]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[delay_minutes]"
+                      cachedDataType="i4"
+                      cachedName="delay_minutes"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[delay_minutes]"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[delay_minutes]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[actual_duration_min]"
+                      cachedDataType="i4"
+                      cachedName="actual_duration_min"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[actual_duration_min]"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[actual_duration_min]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[airport_key]"
+                      cachedDataType="i4"
+                      cachedName="airport_key"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[departure_airport_key]"
+                      lineageId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup Match Output].Columns[airport_key]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[airport_key1]"
+                      cachedDataType="i4"
+                      cachedName="airport_key"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[arrival_airport_key]"
+                      lineageId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup Match Output].Columns[airport_key]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[aircraft_key]"
+                      cachedDataType="i4"
+                      cachedName="aircraft_key"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[aircraft_key]"
+                      lineageId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup Match Output].Columns[aircraft_key]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[passenger_key]"
+                      cachedDataType="i4"
+                      cachedName="passenger_key"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[passenger_key]"
+                      lineageId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup Match Output].Columns[passenger_key]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[fare_key]"
+                      cachedDataType="i4"
+                      cachedName="fare_key"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[fare_key]"
+                      lineageId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup Match Output].Columns[fare_key]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[flight_id]"
+                      cachedDataType="i4"
+                      cachedName="flight_id"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[flight_id]"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[flight_id]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[ticket_no_conv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="13"
+                      cachedName="ticket_no_conv"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[ticket_no]"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[ticket_no_conv]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[book_ref_conv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="book_ref_conv"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[book_ref]"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[book_ref_conv]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[ticket_price]"
+                      cachedDataType="r8"
+                      cachedName="ticket_price"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[ticket_price]"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[ticket_price]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[total_amount]"
+                      cachedDataType="r8"
+                      cachedName="total_amount"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[total_booking_amount]"
+                      lineageId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output].Columns[total_amount]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[scheduled_duration_min]"
+                      cachedDataType="i4"
+                      cachedName="scheduled_duration_min"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_duration_min]"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[scheduled_duration_min]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[flight_status_conv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="flight_status_conv"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[flight_status]"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[flight_status_conv]" />
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].Columns[is_cancelled]"
+                      cachedDataType="bool"
+                      cachedName="is_cancelled"
+                      externalMetadataColumnId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[is_cancelled]"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[is_cancelled]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[fact_id]"
+                      dataType="i4"
+                      name="fact_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[date_key]"
+                      dataType="i4"
+                      name="date_key" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[departure_airport_key]"
+                      dataType="i4"
+                      name="departure_airport_key" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[arrival_airport_key]"
+                      dataType="i4"
+                      name="arrival_airport_key" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[aircraft_key]"
+                      dataType="i4"
+                      name="aircraft_key" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[passenger_key]"
+                      dataType="i4"
+                      name="passenger_key" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[fare_key]"
+                      dataType="i4"
+                      name="fare_key" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[flight_id]"
+                      dataType="i4"
+                      name="flight_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[ticket_no]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      name="ticket_no" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[book_ref]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="book_ref" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[ticket_price]"
+                      dataType="numeric"
+                      name="ticket_price"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[total_booking_amount]"
+                      dataType="numeric"
+                      name="total_booking_amount"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_duration_min]"
+                      dataType="i4"
+                      name="scheduled_duration_min" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[actual_duration_min]"
+                      dataType="i4"
+                      name="actual_duration_min" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[delay_minutes]"
+                      dataType="i4"
+                      name="delay_minutes" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[flight_status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="flight_status" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[is_cancelled]"
+                      dataType="bool"
+                      name="is_cancelled" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_create_time" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_complete_time" />
+                    <externalMetadataColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input].ExternalColumns[txn_process_time_hours]"
+                      dataType="numeric"
+                      name="txn_process_time_hours"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactFlightSegments\Lookup Aircraft Key"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Aircraft Key"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT aircraft_key, airplane_code FROM DimAircraft</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT aircraft_key, airplane_code FROM DimAircraft) [refTable]
+where [refTable].[airplane_code] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="aircraft_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="airplane_code" dataType="DT_STR" length="3" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[aircraft_code_conv]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactFlightSegments\Lookup Aircraft Key.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load FactFlightSegments\Lookup Aircraft Key.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Aircraft Key.Inputs[Lookup Input].Columns[aircraft_code_conv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="aircraft_code_conv"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[aircraft_code_conv]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">airplane_code</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Aircraft Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup Match Output].Columns[aircraft_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup Match Output].Columns[aircraft_key]"
+                      name="aircraft_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">aircraft_key</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup Match Output].Columns[airplane_code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="3"
+                      lineageId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup Match Output].Columns[airplane_code]"
+                      name="airplane_code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">airplane_code</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Aircraft Key.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Aircraft Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactFlightSegments\Lookup Arrival Airport Key"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Arrival Airport Key"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT airport_key, airport_code FROM DimAirport</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT airport_key, airport_code FROM DimAirport) [refTable]
+where [refTable].[airport_code] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="airport_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="airport_code" dataType="DT_STR" length="3" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[arrival_airport_conv]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Inputs[Lookup Input].Columns[arrival_airport_conv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="arrival_airport_conv"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[arrival_airport_conv]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">airport_code</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup Match Output].Columns[airport_code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="3"
+                      lineageId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup Match Output].Columns[airport_code]"
+                      name="airport_code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">airport_code</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup Match Output].Columns[airport_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup Match Output].Columns[airport_key]"
+                      name="airport_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">airport_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactFlightSegments\Lookup Departure Airport Key"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Departure Airport Key"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT airport_key, airport_code FROM DimAirport</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT airport_key, airport_code FROM DimAirport) [refTable]
+where [refTable].[airport_code] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="airport_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="airport_code" dataType="DT_STR" length="3" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[departure_airport_conv]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Inputs[Lookup Input].Columns[departure_airport_conv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="departure_airport_conv"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[departure_airport_conv]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">airport_code</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup Match Output].Columns[airport_code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="3"
+                      lineageId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup Match Output].Columns[airport_code]"
+                      name="airport_code"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">airport_code</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup Match Output].Columns[airport_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup Match Output].Columns[airport_key]"
+                      name="airport_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">airport_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactFlightSegments\Lookup Fare Key"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Fare Key"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT fare_key, fare_conditions FROM DimFareConditions</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT fare_key, fare_conditions FROM DimFareConditions) [refTable]
+where [refTable].[fare_conditions] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="fare_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="fare_conditions" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[fare_conditions_conv]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactFlightSegments\Lookup Fare Key.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load FactFlightSegments\Lookup Fare Key.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Fare Key.Inputs[Lookup Input].Columns[fare_conditions_conv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="fare_conditions_conv"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[fare_conditions_conv]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">fare_conditions</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Fare Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup Match Output].Columns[fare_conditions]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup Match Output].Columns[fare_conditions]"
+                      name="fare_conditions"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">fare_conditions</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup Match Output].Columns[fare_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup Match Output].Columns[fare_key]"
+                      name="fare_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">fare_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Fare Key.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Fare Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load FactFlightSegments\Lookup Passenger Key"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup Passenger Key"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT passenger_key, passenger_id FROM DimPassenger WHERE is_current = 1</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT passenger_key, passenger_id FROM DimPassenger WHERE is_current = 1) [refTable]
+where [refTable].[passenger_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="passenger_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="passenger_id" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[passenger_id_conv]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load FactFlightSegments\Lookup Passenger Key.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load FactFlightSegments\Lookup Passenger Key.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Passenger Key.Inputs[Lookup Input].Columns[passenger_id_conv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="passenger_id_conv"
+                      lineageId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output].Columns[passenger_id_conv]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">passenger_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Passenger Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup Match Output].Columns[passenger_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup Match Output].Columns[passenger_id]"
+                      name="passenger_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">passenger_id</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup Match Output].Columns[passenger_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup Match Output].Columns[passenger_key]"
+                      name="passenger_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">passenger_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Passenger Key.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load FactFlightSegments\Lookup Passenger Key.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load FactFlightSegments.Paths[Data Conversion Output]"
+              endId="Package\Load FactFlightSegments\Derived Column.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\Load FactFlightSegments\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Load FactFlightSegments.Paths[Derived Column Output]"
+              endId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load FactFlightSegments.Paths[Lookup Match Output]"
+              endId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load FactFlightSegments\Lookup Departure Airport Key.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load FactFlightSegments.Paths[Lookup Match Output1]"
+              endId="Package\Load FactFlightSegments\Lookup Aircraft Key.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load FactFlightSegments\Lookup Arrival Airport Key.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load FactFlightSegments.Paths[Lookup Match Output2]"
+              endId="Package\Load FactFlightSegments\Lookup Passenger Key.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load FactFlightSegments\Lookup Aircraft Key.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load FactFlightSegments.Paths[Lookup Match Output3]"
+              endId="Package\Load FactFlightSegments\Lookup Fare Key.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load FactFlightSegments\Lookup Passenger Key.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load FactFlightSegments.Paths[Lookup Match Output4]"
+              endId="Package\Load FactFlightSegments\Insert into FactFlightSegments.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\Load FactFlightSegments\Lookup Fare Key.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load FactFlightSegments.Paths[OLE DB Source Output]"
+              endId="Package\Load FactFlightSegments\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load FactFlightSegments\Extract from Staging.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Populate DimDate"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
@@ -1183,7 +3335,7 @@ FROM dbo.StgSeats</property>
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      length="50"
+                      length="20"
                       lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_id_conv]"
                       name="passenger_id_conv"
                       truncationRowDisposition="FailComponent">
@@ -1388,7 +3540,7 @@ FROM dbo.StgSeats</property>
                   <outputColumns>
                     <outputColumn
                       refId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output].Columns[is_current_new]"
-                      dataType="i4"
+                      dataType="bool"
                       errorOrTruncationOperation="Computation"
                       errorRowDisposition="FailComponent"
                       lineageId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output].Columns[is_current_new]"
@@ -1399,13 +3551,13 @@ FROM dbo.StgSeats</property>
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">(DT_I4)1</property>
+                          name="Expression">(DT_BOOL)TRUE</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">(DT_I4)1</property>
+                          name="FriendlyExpression">(DT_BOOL)TRUE</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1483,7 +3635,7 @@ FROM dbo.StgSeats</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT passenger_id, passenger_name, contact_data FROM [dbo].[StgTickets]</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1494,13 +3646,13 @@ FROM dbo.StgSeats</property>
                   name="DefaultCodePage">1252</property>
                 <property
                   dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  description="Forces the use of the DefaultCodePage property value when describing characteristic data."
                   name="AlwaysUseDefaultCodePage">false</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
@@ -1519,25 +3671,6 @@ FROM dbo.StgSeats</property>
                   refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[ticket_no]"
-                      dataType="i8"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[ticket_no]"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[ticket_no]"
-                      name="ticket_no"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[book_ref]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[book_ref]"
-                      length="50"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[book_ref]"
-                      name="book_ref"
-                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_id]"
                       dataType="wstr"
@@ -1572,15 +3705,6 @@ FROM dbo.StgSeats</property>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[ticket_no]"
-                      dataType="i8"
-                      name="ticket_no" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[book_ref]"
-                      dataType="wstr"
-                      length="50"
-                      name="book_ref" />
-                    <externalMetadataColumn
                       refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[passenger_id]"
                       dataType="wstr"
                       length="50"
@@ -1602,17 +3726,6 @@ FROM dbo.StgSeats</property>
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[ticket_no]"
-                      dataType="i8"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[ticket_no]"
-                      name="ticket_no" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[book_ref]"
-                      dataType="wstr"
-                      length="50"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[book_ref]"
-                      name="book_ref" />
                     <outputColumn
                       refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[passenger_id]"
                       dataType="wstr"
@@ -1722,7 +3835,7 @@ FROM dbo.StgSeats</property>
                   <inputColumns>
                     <inputColumn
                       refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].Columns[is_current_new]"
-                      cachedDataType="i4"
+                      cachedDataType="bool"
                       cachedName="is_current_new"
                       externalMetadataColumnId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_current]"
                       lineageId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output].Columns[is_current_new]" />
@@ -1730,7 +3843,7 @@ FROM dbo.StgSeats</property>
                       refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].Columns[passenger_id_conv]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="50"
+                      cachedLength="20"
                       cachedName="passenger_id_conv"
                       externalMetadataColumnId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[passenger_id]"
                       lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_id_conv]" />
@@ -1880,7 +3993,7 @@ WHERE  passenger_id = ?
                       refId="Package\Transform and Load DimPassenger\OLE DB Command.Inputs[OLE DB Command Input].Columns[passenger_id_conv]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="50"
+                      cachedLength="20"
                       cachedName="passenger_id_conv"
                       externalMetadataColumnId="Package\Transform and Load DimPassenger\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
                       lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_id_conv]" />
@@ -1998,7 +4111,7 @@ WHERE  passenger_id = ?
                       refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[passenger_id_conv]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="50"
+                      cachedLength="20"
                       cachedName="passenger_id_conv"
                       externalMetadataColumnId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
                       lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_id_conv]" />
@@ -2156,7 +4269,7 @@ WHERE  passenger_id = ?
                       refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[passenger_id_conv]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="50"
+                      cachedLength="20"
                       cachedName="passenger_id_conv"
                       externalMetadataColumnId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[passenger_id]"
                       lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_id_conv]">
@@ -2309,6 +4422,48 @@ WHERE  passenger_id = ?
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{152F0D38-9E14-4BC2-9EF3-4FEB91FBB3B6}"
+      DTS:From="Package\Populate DimDate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Transform and Load DimAirport" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{24C0DAF3-EF9F-4F55-8442-A4627371611F}"
+      DTS:From="Package\Transform and Load DimAirport"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Transform and Load DimAircraft" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{0C4DD2C9-C439-4F97-87D9-56B2E73AB745}"
+      DTS:From="Package\Transform and Load DimAircraft"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Transform and Load DimFareConditions" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{6A8EC159-1FE6-4539-8143-CB87BABB2BB6}"
+      DTS:From="Package\Transform and Load DimFareConditions"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Transform and Load DimPassenger" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{E5C3AEC3-9CC9-4F4C-9427-C1F3D75CDEF0}"
+      DTS:From="Package\Transform and Load DimPassenger"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Load FactFlightSegments" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -2320,7 +4475,11 @@ WHERE  passenger_id = ?
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="208,41.6"
+          Id="Package\Load FactFlightSegments"
+          TopLeft="261.16666507307,416.933332529918" />
         <NodeLayout
           Size="162.4,41.6"
           Id="Package\Populate DimDate"
@@ -2328,11 +4487,11 @@ WHERE  passenger_id = ?
         <NodeLayout
           Size="226.4,41.6"
           Id="Package\Transform and Load DimAircraft"
-          TopLeft="216.666654828522,80.5999994395176" />
+          TopLeft="67.4999963119624,179.399998752475" />
         <NodeLayout
           Size="224,41.6"
           Id="Package\Transform and Load DimAirport"
-          TopLeft="306.66664991114,138.666665702396" />
+          TopLeft="41.6666643901009,99.6666659735971" />
         <NodeLayout
           Size="264,41.6"
           Id="Package\Transform and Load DimFareConditions"
@@ -2341,14 +4500,628 @@ WHERE  passenger_id = ?
           Size="243.2,41.6"
           Id="Package\Transform and Load DimPassenger"
           TopLeft="199.16665578468,287.733331332472" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="137.033330282735,60.666666534079">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16.6333341073664,38.9999994395181"
+              Start="0,0"
+              End="16.6333341073664,31.4999994395181">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.4999997197591" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.4999997197591"
+                    Point2="0,19.4999997197591"
+                    Point3="4,19.4999997197591" />
+                  <mssgle:LineSegment
+                    End="12.6333341073664,19.4999997197591" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.6333341073664,19.4999997197591"
+                    Point2="16.6333341073664,19.4999997197591"
+                    Point3="16.6333341073664,23.4999997197591" />
+                  <mssgle:LineSegment
+                    End="16.6333341073664,31.4999994395181" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="153.666664390101,141.266665973597">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="27.0333319218615,38.1333327788776"
+              Start="0,0"
+              End="27.0333319218615,30.6333327788776">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.0666663894388" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.0666663894388"
+                    Point2="0,19.0666663894388"
+                    Point3="4,19.0666663894388" />
+                  <mssgle:LineSegment
+                    End="23.0333319218615,19.0666663894388" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.0333319218615,19.0666663894388"
+                    Point2="27.0333319218615,19.0666663894388"
+                    Point3="27.0333319218615,23.0666663894388" />
+                  <mssgle:LineSegment
+                    End="27.0333319218615,30.6333327788776" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="293.899996311962,198.499998463194">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="86.4333234530367,22.5"
+              Start="0,0"
+              End="86.4333234530367,15">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="82.4333234530367,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="82.4333234530367,0"
+                    Point2="86.4333234530367,0"
+                    Point3="86.4333234530367,4" />
+                  <mssgle:LineSegment
+                    End="86.4333234530367,15" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="380.333319764999,262.599998463194">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-59.566663980319,25.133332869278"
+              Start="0,0"
+              End="-59.566663980319,17.633332869278">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.56666643463899" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.56666643463899"
+                    Point2="0,12.566666434639"
+                    Point3="-4,12.566666434639" />
+                  <mssgle:LineSegment
+                    End="-55.566663980319,12.566666434639" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-55.566663980319,12.566666434639"
+                    Point2="-59.566663980319,12.566666434639"
+                    Point3="-59.566663980319,16.566666434639" />
+                  <mssgle:LineSegment
+                    End="-59.566663980319,17.633332869278" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="320.76665578468,329.333331332472">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="44.4000092883904,87.600001197446"
+              Start="0,0"
+              End="44.4000092883904,80.100001197446">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.800000598723" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39.800000598723"
+                    Point2="0,43.800000598723"
+                    Point3="4,43.800000598723" />
+                  <mssgle:LineSegment
+                    End="40.4000092883904,43.800000598723" />
+                  <mssgle:CubicBezierSegment
+                    Point1="40.4000092883904,43.800000598723"
+                    Point2="44.4000092883904,43.800000598723"
+                    Point3="44.4000092883904,47.800000598723" />
+                  <mssgle:LineSegment
+                    End="44.4000092883904,80.100001197446" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
+    design-time-name="Package\Load FactFlightSegments">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Load FactFlightSegments\Lookup Aircraft Key"
+          TopLeft="184.999989892046,385.666663984789" />
+        <NodeLayout
+          Size="219.2,41.6"
+          Id="Package\Load FactFlightSegments\Insert into FactFlightSegments"
+          TopLeft="457.499975003303,595.666663008465" />
+        <NodeLayout
+          Size="157.6,41.6"
+          Id="Package\Load FactFlightSegments\Lookup Fare Key"
+          TopLeft="256.666652643019,545.133329542544" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Load FactFlightSegments\Derived Column"
+          TopLeft="144.99999207755,142.999999005596" />
+        <NodeLayout
+          Size="199.2,41.6"
+          Id="Package\Load FactFlightSegments\Lookup Arrival Airport Key"
+          TopLeft="154.999991531174,308.533331187831" />
+        <NodeLayout
+          Size="185.6,41.6"
+          Id="Package\Load FactFlightSegments\Lookup Passenger Key"
+          TopLeft="207.4999886627,463.666663442387" />
+        <NodeLayout
+          Size="216,41.6"
+          Id="Package\Load FactFlightSegments\Lookup Departure Airport Key"
+          TopLeft="119.999993443489,213.199998517434" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Load FactFlightSegments\Data Conversion"
+          TopLeft="102.499994399647,75.3999994756778" />
+        <NodeLayout
+          Size="191.2,41.6"
+          Id="Package\Load FactFlightSegments\Extract from Staging"
+          TopLeft="52.5000036880372,4.63333333936003" />
+        <EdgeLayout
+          Id="Package\Load FactFlightSegments.Paths[Derived Column Output]"
+          TopLeft="224.699992760519,184.599999005596">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.5999995118379"
+              Start="0,0"
+              End="0,21.0999995118379">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.0999995118379" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactFlightSegments.Paths[Data Conversion Output]"
+          TopLeft="180.499994399647,116.999999475678">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.8999976779025,25.9999995299181"
+              Start="0,0"
+              End="40.8999976779025,18.4999995299181">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.99999976495904" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.99999976495904"
+                    Point2="0,12.999999764959"
+                    Point3="4,12.999999764959" />
+                  <mssgle:LineSegment
+                    End="36.8999976779025,12.999999764959" />
+                  <mssgle:CubicBezierSegment
+                    Point1="36.8999976779025,12.999999764959"
+                    Point2="40.8999976779025,12.999999764959"
+                    Point3="40.8999976779025,16.999999764959" />
+                  <mssgle:LineSegment
+                    End="40.8999976779025,18.4999995299181" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactFlightSegments.Paths[OLE DB Source Output]"
+          TopLeft="148.100003688037,46.23333333936">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="32.3999907116099,29.1666661363178"
+              Start="0,0"
+              End="32.3999907116099,21.6666661363178">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.5833330681589" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.5833330681589"
+                    Point2="0,14.5833330681589"
+                    Point3="4,14.5833330681589" />
+                  <mssgle:LineSegment
+                    End="28.3999907116099,14.5833330681589" />
+                  <mssgle:CubicBezierSegment
+                    Point1="28.3999907116099,14.5833330681589"
+                    Point2="32.3999907116099,14.5833330681589"
+                    Point3="32.3999907116099,18.5833330681589" />
+                  <mssgle:LineSegment
+                    End="32.3999907116099,21.6666661363178" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactFlightSegments.Paths[Lookup Match Output4]"
+          TopLeft="414.266652643019,565.933329542544">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43.2333223602843,50.5333334659206"
+              Start="0,0"
+              End="35.7333223602843,50.5333334659206">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="17.6166611801422,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17.6166611801422,0"
+                    Point2="21.6166611801422,0"
+                    Point3="21.6166611801422,4" />
+                  <mssgle:LineSegment
+                    End="21.6166611801422,46.5333334659206" />
+                  <mssgle:CubicBezierSegment
+                    Point1="21.6166611801422,46.5333334659206"
+                    Point2="21.6166611801422,50.5333334659206"
+                    Point3="25.6166611801422,50.5333334659206" />
+                  <mssgle:LineSegment
+                    End="35.7333223602843,50.5333334659206" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-26.5747255386078,-17.609375,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactFlightSegments.Paths[Lookup Match Output3]"
+          TopLeft="300.2999886627,505.266663442387">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="35.1666639803186,39.8666661001576"
+              Start="0,0"
+              End="35.1666639803186,32.3666661001576">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.9333330500788" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.9333330500788"
+                    Point2="0,19.9333330500788"
+                    Point3="4,19.9333330500788" />
+                  <mssgle:LineSegment
+                    End="31.1666639803186,19.9333330500788" />
+                  <mssgle:CubicBezierSegment
+                    Point1="31.1666639803186,19.9333330500788"
+                    Point2="35.1666639803186,19.9333330500788"
+                    Point3="35.1666639803186,23.9333330500788" />
+                  <mssgle:LineSegment
+                    End="35.1666639803186,32.3666661001576" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-30.6080547285907,24.9333330500788,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactFlightSegments.Paths[Lookup Match Output2]"
+          TopLeft="269.399989892046,427.266663984789">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="30.8999987706543,36.3999994575977"
+              Start="0,0"
+              End="30.8999987706543,28.8999994575977">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.1999997287988" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.1999997287988"
+                    Point2="0,18.1999997287988"
+                    Point3="4,18.1999997287988" />
+                  <mssgle:LineSegment
+                    End="26.8999987706543,18.1999997287988" />
+                  <mssgle:CubicBezierSegment
+                    Point1="26.8999987706543,18.1999997287988"
+                    Point2="30.8999987706543,18.1999997287988"
+                    Point3="30.8999987706543,22.1999997287988" />
+                  <mssgle:LineSegment
+                    End="30.8999987706543,28.8999994575977" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-32.7413873334229,23.1999997287988,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactFlightSegments.Paths[Lookup Match Output1]"
+          TopLeft="254.599991531174,350.133331187831">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14.7999983608723,35.5333327969578"
+              Start="0,0"
+              End="14.7999983608723,28.0333327969578">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.7666663984789" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.7666663984789"
+                    Point2="0,17.7666663984789"
+                    Point3="4,17.7666663984789" />
+                  <mssgle:LineSegment
+                    End="10.7999983608723,17.7666663984789" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.7999983608723,17.7666663984789"
+                    Point2="14.7999983608723,17.7666663984789"
+                    Point3="14.7999983608723,21.7666663984789" />
+                  <mssgle:LineSegment
+                    End="14.7999983608723,28.0333327969578" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-40.7913875383139,22.7666663984789,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactFlightSegments.Paths[Lookup Match Output]"
+          TopLeft="227.999993443489,254.799998517434">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="26.5999980876844,53.7333326703974"
+              Start="0,0"
+              End="26.5999980876844,46.2333326703974">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.8666663351987" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.8666663351987"
+                    Point2="0,26.8666663351987"
+                    Point3="4,26.8666663351987" />
+                  <mssgle:LineSegment
+                    End="22.5999980876844,26.8666663351987" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.5999980876844,26.8666663351987"
+                    Point2="26.5999980876844,26.8666663351987"
+                    Point3="26.5999980876844,30.8666663351987" />
+                  <mssgle:LineSegment
+                    End="26.5999980876844,46.2333326703974" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-34.8913876749078,31.8666663351987,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactFlightSegments\Lookup Aircraft Key">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactFlightSegments\Insert into FactFlightSegments">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactFlightSegments\Lookup Fare Key">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactFlightSegments\Lookup Arrival Airport Key">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactFlightSegments\Lookup Passenger Key">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactFlightSegments\Lookup Departure Airport Key">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactFlightSegments\Extract from Staging">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
     design-time-name="Package\Transform and Load DimAircraft">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="156,41.6"
           Id="Package\Transform and Load DimAircraft\Load DimAircraft"
@@ -2388,7 +5161,9 @@ WHERE  passenger_id = ?
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2411,7 +5186,7 @@ WHERE  passenger_id = ?
     design-time-name="Package\Transform and Load DimAirport">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="153.6,41.6"
           Id="Package\Transform and Load DimAirport\Load DimAirport"
@@ -2451,7 +5226,9 @@ WHERE  passenger_id = ?
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="35.135526382625,35.6999992325901,41.1289453125,9.568359375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2474,7 +5251,7 @@ WHERE  passenger_id = ?
     design-time-name="Package\Transform and Load DimFareConditions">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="193.6,41.6"
           Id="Package\Transform and Load DimFareConditions\Load DimFareConditions"
@@ -2514,7 +5291,9 @@ WHERE  passenger_id = ?
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2588,7 +5367,9 @@ WHERE  passenger_id = ?
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2670,7 +5451,9 @@ WHERE  passenger_id = ?
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2692,7 +5475,9 @@ WHERE  passenger_id = ?
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2714,7 +5499,9 @@ WHERE  passenger_id = ?
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2736,7 +5523,9 @@ WHERE  passenger_id = ?
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
