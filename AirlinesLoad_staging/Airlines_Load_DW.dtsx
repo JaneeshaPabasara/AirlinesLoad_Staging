@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="46"
-  DTS:VersionGUID="{2A4B7304-0C16-4A0B-843F-EC5E5CCBBEED}">
+  DTS:VersionBuild="47"
+  DTS:VersionGUID="{C70B4811-C636-4582-B7C3-9FA2BC4A8A2B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1408,6 +1408,28 @@ FROM dbo.StgSeats</property>
                           name="FriendlyExpression">(DT_I4)1</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output].Columns[effective_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output].Columns[effective_date]"
+                      name="effective_date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DBTIMESTAMP)([GETDATE]())</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DBTIMESTAMP)(GETDATE())</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -1731,7 +1753,7 @@ FROM dbo.StgSeats</property>
                       cachedDataType="dbTimeStamp"
                       cachedName="effective_date"
                       externalMetadataColumnId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[effective_date]"
-                      lineageId="Package\Transform and Load DimPassenger\196:invalid" />
+                      lineageId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output].Columns[effective_date]" />
                     <inputColumn
                       refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].Columns[travel_tier_derived]"
                       cachedCodepage="1252"
@@ -2512,9 +2534,13 @@ WHERE  passenger_id = ?
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="185.6,41.6"
-          Id="Package\Transform and Load DimPassenger\Extract from StgTickets"
-          TopLeft="141.3,5.49999999999995" />
+          Size="159.2,41.6"
+          Id="Package\Transform and Load DimPassenger\Insert Destination"
+          TopLeft="154.5,818.299999999999" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Transform and Load DimPassenger\Derived Column"
+          TopLeft="20.7000000000001,411.9" />
         <NodeLayout
           Size="211.2,41.6"
           Id="Package\Transform and Load DimPassenger\Convert Passenger Columns"
@@ -2524,9 +2550,151 @@ WHERE  passenger_id = ?
           Id="Package\Transform and Load DimPassenger\Slowly Changing Dimension"
           TopLeft="130.1,310.3" />
         <NodeLayout
+          Size="176,41.6"
+          Id="Package\Transform and Load DimPassenger\OLE DB Command 1"
+          TopLeft="295.1,411.9" />
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Transform and Load DimPassenger\Derived Column 1"
+          TopLeft="155.383333219505,685.2833335518" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Transform and Load DimPassenger\OLE DB Command"
+          TopLeft="15.9166660975252,548.166666425598" />
+        <NodeLayout
+          Size="185.6,41.6"
+          Id="Package\Transform and Load DimPassenger\Extract from StgTickets"
+          TopLeft="141.3,5.49999999999995" />
+        <NodeLayout
           Size="145.6,41.6"
           Id="Package\Transform and Load DimPassenger\Add travel_tier"
           TopLeft="161.3,208.7" />
+        <EdgeLayout
+          Id="Package\Transform and Load DimPassenger.Paths[OLE DB Source Output]"
+          TopLeft="234.1,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform and Load DimPassenger.Paths[New Output]"
+          TopLeft="235.141666609753,351.9">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,333.383333551801"
+              Start="0,0"
+              End="0,325.883333551801">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,325.883333551801" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-27.09138671875,157.2248699009,54.1827734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform and Load DimPassenger.Paths[Historical Attribute Inserts Output]"
+          TopLeft="184.1,351.9">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-87,59.9999999999999"
+              Start="0,0"
+              End="-87,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.506329113924" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.506329113924"
+                    Point2="0,20.506329113924"
+                    Point3="-4,20.506329113924" />
+                  <mssgle:LineSegment
+                    End="-83,20.506329113924" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-83,20.506329113924"
+                    Point2="-87,20.506329113924"
+                    Point3="-87,24.506329113924" />
+                  <mssgle:LineSegment
+                    End="-87,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-118.55638671875,25.506329113924,150.1127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform and Load DimPassenger.Paths[Derived Column Output2]"
+          TopLeft="235.141666609753,726.8833335518">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,91.4166664481988"
+              Start="0,0"
+              End="0,83.9166664481988">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,83.9166664481988" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Transform and Load DimPassenger.Paths[Derived Column Output1]"
+          TopLeft="98.3083330487626,453.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,94.6666664255989"
+              Start="0,0"
+              End="0,87.1666664255989">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,87.1666664255989" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Transform and Load DimPassenger.Paths[Derived Column Output]"
           TopLeft="234.1,250.3">
@@ -2572,106 +2740,6 @@ WHERE  passenger_id = ?
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[OLE DB Source Output]"
-          TopLeft="234.1,47.1">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Transform and Load DimPassenger\Derived Column"
-          TopLeft="20.7000000000001,411.9" />
-        <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[Historical Attribute Inserts Output]"
-          TopLeft="184.1,351.9">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-87,59.9999999999999"
-              Start="0,0"
-              End="-87,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.506329113924" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,16.506329113924"
-                    Point2="0,20.506329113924"
-                    Point3="-4,20.506329113924" />
-                  <mssgle:LineSegment
-                    End="-83,20.506329113924" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-83,20.506329113924"
-                    Point2="-87,20.506329113924"
-                    Point3="-87,24.506329113924" />
-                  <mssgle:LineSegment
-                    End="-87,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-118.55638671875,25.506329113924,150.1127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="167.2,41.6"
-          Id="Package\Transform and Load DimPassenger\OLE DB Command"
-          TopLeft="15.9166660975252,548.166666425598" />
-        <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[Derived Column Output1]"
-          TopLeft="98.3083330487626,453.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,94.6666664255989"
-              Start="0,0"
-              End="0,87.1666664255989">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,87.1666664255989" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="161.6,41.6"
-          Id="Package\Transform and Load DimPassenger\Derived Column 1"
-          TopLeft="155.383333219505,685.2833335518" />
-        <NodeLayout
-          Size="159.2,41.6"
-          Id="Package\Transform and Load DimPassenger\Insert Destination"
-          TopLeft="154.5,818.299999999999" />
-        <NodeLayout
-          Size="176,41.6"
-          Id="Package\Transform and Load DimPassenger\OLE DB Command 1"
-          TopLeft="295.1,411.9" />
-        <EdgeLayout
           Id="Package\Transform and Load DimPassenger.Paths[Changing Attribute Updates Output]"
           TopLeft="284.1,351.9">
           <EdgeLayout.Curve>
@@ -2707,57 +2775,22 @@ WHERE  passenger_id = ?
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[New Output]"
-          TopLeft="235.141666609753,351.9">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,333.383333551801"
-              Start="0,0"
-              End="0,325.883333551801">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,325.883333551801" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-27.09138671875,157.2248699009,54.1827734375,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[Derived Column Output2]"
-          TopLeft="235.141666609753,726.8833335518">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,91.4166664481988"
-              Start="0,0"
-              End="0,83.9166664481988">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,83.9166664481988" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-8,33.9583332240994,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Transform and Load DimPassenger\Insert Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Transform and Load DimPassenger\Slowly Changing Dimension">
     <Properties>
@@ -2813,19 +2846,6 @@ WHERE  passenger_id = ?
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Transform and Load DimPassenger\Extract from StgTickets">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Transform and Load DimPassenger\Insert Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
