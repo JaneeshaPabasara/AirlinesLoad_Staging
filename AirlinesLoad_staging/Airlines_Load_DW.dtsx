@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="56"
-  DTS:VersionGUID="{51B84DEA-9FFD-4D65-BAA5-BB37DDC93621}">
+  DTS:VersionBuild="67"
+  DTS:VersionGUID="{9C29A792-39E6-4124-B506-DB882BB8DC4B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -54,6 +54,23 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
+      DTS:refId="Package\Load DimPassenger SCD2"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{68AB4450-4C0A-4D9D-8C3E-EE5071B5574D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load DimPassenger SCD2"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B97725BF-6951-46A1-A01F-010D4FD37B66}"
+          SQLTask:SqlStatementSource="&#xA;IF OBJECT_ID('tempdb..#src') IS NOT NULL DROP TABLE #src;&#xA;&#xA;SELECT&#xA;    passenger_id,&#xA;    passenger_name,&#xA;    booking_count,&#xA;    CASE&#xA;        WHEN booking_count &gt;= 5 THEN 'Frequent Flyer'&#xA;        WHEN booking_count &gt;= 2 THEN 'Regular'&#xA;        ELSE 'Occasional'&#xA;    END AS travel_tier&#xA;INTO #src&#xA;FROM (&#xA;    SELECT&#xA;        passenger_id,&#xA;        passenger_name,&#xA;        COUNT(*) OVER (PARTITION BY passenger_id) AS booking_count&#xA;    FROM Airlines_Staging.dbo.StgTickets&#xA;) base&#xA;GROUP BY passenger_id, passenger_name, booking_count;&#xA;&#xA;&#xA;INSERT INTO DimPassenger&#xA;    (passenger_id, passenger_name, travel_tier,&#xA;     is_current, effective_date, expiry_date)&#xA;SELECT&#xA;    s.passenger_id,&#xA;    s.passenger_name,&#xA;    s.travel_tier,&#xA;    1,&#xA;    CAST(GETDATE() AS DATE),&#xA;    NULL&#xA;FROM #src s&#xA;WHERE NOT EXISTS (&#xA;    SELECT 1 FROM DimPassenger d&#xA;    WHERE d.passenger_id = s.passenger_id&#xA;);&#xA;&#xA;&#xA;UPDATE d&#xA;SET&#xA;    d.is_current   = 0,&#xA;    d.expiry_date  = CAST(GETDATE() AS DATE)&#xA;FROM DimPassenger d&#xA;INNER JOIN #src s&#xA;    ON d.passenger_id = s.passenger_id&#xA;WHERE d.is_current = 1&#xA;  AND d.travel_tier &lt;&gt; s.travel_tier;&#xA;&#xA;&#xA;INSERT INTO DimPassenger&#xA;    (passenger_id, passenger_name, travel_tier,&#xA;     is_current, effective_date, expiry_date)&#xA;SELECT&#xA;    s.passenger_id,&#xA;    s.passenger_name,&#xA;    s.travel_tier,&#xA;    1,&#xA;    CAST(GETDATE() AS DATE),&#xA;    NULL&#xA;FROM #src s&#xA;INNER JOIN DimPassenger d&#xA;    ON s.passenger_id = d.passenger_id&#xA;WHERE d.is_current = 0&#xA;  AND d.expiry_date = CAST(GETDATE() AS DATE)&#xA;  AND NOT EXISTS (&#xA;      SELECT 1 FROM DimPassenger d2&#xA;      WHERE d2.passenger_id = s.passenger_id&#xA;        AND d2.is_current = 1&#xA;  );&#xA;&#xA;&#xA;UPDATE d&#xA;SET d.passenger_name = s.passenger_name&#xA;FROM DimPassenger d&#xA;INNER JOIN #src s&#xA;    ON d.passenger_id = s.passenger_id&#xA;WHERE d.is_current = 1&#xA;  AND d.passenger_name &lt;&gt; s.passenger_name;&#xA;&#xA;DROP TABLE #src;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Load FactFlightSegments"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
@@ -63,6 +80,29 @@
       DTS:ObjectName="Load FactFlightSegments"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Load FactFlightSegments.EventHandlers[OnPreExecute]"
+          DTS:CreationName="OnPreExecute"
+          DTS:DTSID="{78455840-06DD-4D77-A1D3-734ED9670F30}"
+          DTS:EventID="0"
+          DTS:EventName="OnPreExecute"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{172E8319-50B5-4A4B-BE24-E1F4DD2E3550}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables />
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -2232,6 +2272,46 @@ where [refTable].[passenger_id] = ?</property>
       DTS:ObjectName="Transform and Load DimAircraft"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Transform and Load DimAircraft.EventHandlers[OnPreExecute]"
+          DTS:CreationName="OnPreExecute"
+          DTS:DTSID="{6F83D339-D37D-4A5D-A598-123D68258EB5}"
+          DTS:EventID="0"
+          DTS:EventName="OnPreExecute"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{364EF2A7-2A6A-4F17-AADC-57D31D3C0FBE}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Transform and Load DimAircraft.EventHandlers[OnPreExecute]\Execute SQL Task"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{B9755047-42EB-425F-8DB6-0C58D5491AB0}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Execute SQL Task"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{B97725BF-6951-46A1-A01F-010D4FD37B66}"
+                  SQLTask:SqlStatementSource="TRUNCATE TABLE DimAircraft;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -2552,6 +2632,29 @@ where [refTable].[passenger_id] = ?</property>
       DTS:ObjectName="Transform and Load DimAirport"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Transform and Load DimAirport.EventHandlers[OnPreExecute]"
+          DTS:CreationName="OnPreExecute"
+          DTS:DTSID="{B59C13BE-C307-4139-AB0C-9548CCDE0099}"
+          DTS:EventID="0"
+          DTS:EventName="OnPreExecute"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{242524DD-7AFA-4686-8481-1B90E53C0733}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables />
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -3199,1228 +3302,6 @@ FROM dbo.StgSeats</property>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Transform and Load DimPassenger"
-      DTS:CreationName="Microsoft.Pipeline"
-      DTS:Description="Data Flow Task"
-      DTS:DTSID="{7639E4DB-7EA4-4DC3-AAAF-54A0B757236A}"
-      DTS:ExecutableType="Microsoft.Pipeline"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Transform and Load DimPassenger"
-      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <pipeline
-          version="1">
-          <components>
-            <component
-              refId="Package\Transform and Load DimPassenger\Add travel_tier"
-              componentClassID="Microsoft.DerivedColumn"
-              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-              name="Add travel_tier"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\Transform and Load DimPassenger\Add travel_tier.Inputs[Derived Column Input]"
-                  description="Input to the Derived Column Transformation"
-                  name="Derived Column Input">
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Add travel_tier.Outputs[Derived Column Output]"
-                  description="Default Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  name="Derived Column Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Add travel_tier.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Add travel_tier.Outputs[Derived Column Output].Columns[travel_tier_derived]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      length="30"
-                      lineageId="Package\Transform and Load DimPassenger\Add travel_tier.Outputs[Derived Column Output].Columns[travel_tier_derived]"
-                      name="travel_tier_derived"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">(DT_STR,30,1252)"Standard"</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">(DT_STR,30,1252)"Standard"</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Add travel_tier.Outputs[Derived Column Error Output]"
-                  description="Error Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Derived Column Error Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Add travel_tier.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Add travel_tier.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\Add travel_tier.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Add travel_tier.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\Add travel_tier.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Transform and Load DimPassenger\Convert Passenger Columns"
-              componentClassID="Microsoft.DataConvert"
-              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Data Conversion"
-              name="Convert Passenger Columns"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Inputs[Data Conversion Input]"
-                  name="Data Conversion Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Inputs[Data Conversion Input].Columns[passenger_id]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="passenger_id"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_id]" />
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Inputs[Data Conversion Input].Columns[passenger_name]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="passenger_name"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_name]" />
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Inputs[Data Conversion Input].Columns[contact_data]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="contact_data"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[contact_data]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output]"
-                  exclusionGroup="1"
-                  name="Data Conversion Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Inputs[Data Conversion Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_id_conv]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="20"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_id_conv]"
-                      name="passenger_id_conv"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_id]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_name_conv]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="200"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_name_conv]"
-                      name="passenger_name_conv"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_name]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[contact_data_conv]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      length="100"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[contact_data_conv]"
-                      name="contact_data_conv"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[contact_data]}</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Data Conversion Error Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Inputs[Data Conversion Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Transform and Load DimPassenger\Derived Column"
-              componentClassID="Microsoft.DerivedColumn"
-              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-              name="Derived Column"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\Transform and Load DimPassenger\Derived Column.Inputs[Derived Column Input]"
-                  description="Input to the Derived Column Transformation"
-                  name="Derived Column Input">
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Derived Column.Outputs[Derived Column Output]"
-                  description="Default Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  name="Derived Column Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Derived Column.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Derived Column.Outputs[Derived Column Output].Columns[expiry_date]"
-                      dataType="dbTimeStamp"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\Transform and Load DimPassenger\Derived Column.Outputs[Derived Column Output].Columns[expiry_date]"
-                      name="expiry_date"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">(DT_DBTIMESTAMP)(@[User::StartTime])</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">(DT_DBTIMESTAMP)(@[User::StartTime])</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Derived Column.Outputs[Derived Column Output].Columns[is_current]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\Transform and Load DimPassenger\Derived Column.Outputs[Derived Column Output].Columns[is_current]"
-                      name="is_current"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">(DT_I4)1</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">(DT_I4)1</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Derived Column.Outputs[Derived Column Error Output]"
-                  description="Error Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Derived Column Error Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Derived Column.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Transform and Load DimPassenger\Derived Column 1"
-              componentClassID="Microsoft.DerivedColumn"
-              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-              name="Derived Column 1"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\Transform and Load DimPassenger\Derived Column 1.Inputs[Derived Column Input]"
-                  description="Input to the Derived Column Transformation"
-                  name="Derived Column Input">
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output]"
-                  description="Default Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  name="Derived Column Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Derived Column 1.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output].Columns[is_current_new]"
-                      dataType="bool"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output].Columns[is_current_new]"
-                      name="is_current_new"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">(DT_BOOL)TRUE</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">(DT_BOOL)TRUE</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output].Columns[effective_date]"
-                      dataType="dbTimeStamp"
-                      errorOrTruncationOperation="Computation"
-                      errorRowDisposition="FailComponent"
-                      lineageId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output].Columns[effective_date]"
-                      name="effective_date"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Expression"
-                          name="Expression">(DT_DBTIMESTAMP)([GETDATE]())</property>
-                        <property
-                          containsID="true"
-                          dataType="System.String"
-                          description="Derived Column Friendly Expression"
-                          expressionType="Notify"
-                          name="FriendlyExpression">(DT_DBTIMESTAMP)(GETDATE())</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Error Output]"
-                  description="Error Output of the Derived Column Transformation"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Derived Column Error Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Derived Column 1.Inputs[Derived Column Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Transform and Load DimPassenger\Extract from StgTickets"
-              componentClassID="Microsoft.OLEDBSource"
-              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-              description="OLE DB Source"
-              name="Extract from StgTickets"
-              usesDispositions="true"
-              version="7">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[StgTickets]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT passenger_id, passenger_name, contact_data FROM [dbo].[StgTickets]</property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing characteristic data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">2</property>
-                <property
-                  dataType="System.String"
-                  description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
-                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.Airlines_Staging]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output]"
-                  name="OLE DB Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_id]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[passenger_id]"
-                      length="50"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_id]"
-                      name="passenger_id"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_name]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[passenger_name]"
-                      length="50"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[passenger_name]"
-                      name="passenger_name"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[contact_data]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[contact_data]"
-                      length="100"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].Columns[contact_data]"
-                      name="contact_data"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[passenger_id]"
-                      dataType="wstr"
-                      length="50"
-                      name="passenger_id" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[passenger_name]"
-                      dataType="wstr"
-                      length="50"
-                      name="passenger_name" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output].ExternalColumns[contact_data]"
-                      dataType="wstr"
-                      length="100"
-                      name="contact_data" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output]"
-                  isErrorOut="true"
-                  name="OLE DB Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[passenger_id]"
-                      dataType="wstr"
-                      length="50"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[passenger_id]"
-                      name="passenger_id" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[passenger_name]"
-                      dataType="wstr"
-                      length="50"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[passenger_name]"
-                      name="passenger_name" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[contact_data]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[contact_data]"
-                      name="contact_data" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Transform and Load DimPassenger\Insert Destination"
-              componentClassID="Microsoft.OLEDBDestination"
-              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-              description="OLE DB Destination"
-              name="Insert Destination"
-              usesDispositions="true"
-              version="4">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[DimPassenger]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">0</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
-                  name="FastLoadMaxInsertCommitSize">2147483647</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Transform and Load DimPassenger\Insert Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
-                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input]"
-                  errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Destination Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].Columns[is_current_new]"
-                      cachedDataType="bool"
-                      cachedName="is_current_new"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_current]"
-                      lineageId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output].Columns[is_current_new]" />
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].Columns[passenger_id_conv]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="passenger_id_conv"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[passenger_id]"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_id_conv]" />
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].Columns[passenger_name_conv]"
-                      cachedDataType="wstr"
-                      cachedLength="200"
-                      cachedName="passenger_name_conv"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[passenger_name]"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_name_conv]" />
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].Columns[contact_data_conv]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="contact_data_conv"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_data]"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[contact_data_conv]" />
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].Columns[effective_date]"
-                      cachedDataType="dbTimeStamp"
-                      cachedName="effective_date"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[effective_date]"
-                      lineageId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output].Columns[effective_date]" />
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].Columns[travel_tier_derived]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="30"
-                      cachedName="travel_tier_derived"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[travel_tier]"
-                      lineageId="Package\Transform and Load DimPassenger\Add travel_tier.Outputs[Derived Column Output].Columns[travel_tier_derived]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[passenger_key]"
-                      dataType="i4"
-                      name="passenger_key" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[passenger_id]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="passenger_id" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[passenger_name]"
-                      dataType="wstr"
-                      length="200"
-                      name="passenger_name" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_data]"
-                      dataType="wstr"
-                      length="100"
-                      name="contact_data" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[travel_tier]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      name="travel_tier" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[is_current]"
-                      dataType="bool"
-                      name="is_current" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[effective_date]"
-                      dataType="dbTimeStamp"
-                      name="effective_date" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input].ExternalColumns[expiry_date]"
-                      dataType="dbTimeStamp"
-                      name="expiry_date" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Insert Destination.Outputs[OLE DB Destination Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\Insert Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Transform and Load DimPassenger\OLE DB Command"
-              componentClassID="Microsoft.OLEDBCommand"
-              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
-              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
-              name="OLE DB Command"
-              usesDispositions="true"
-              version="2">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE dbo.DimPassenger
-SET    is_current  = 0,
-       expiry_date = GETDATE()
-WHERE  passenger_id = ?
-  AND  is_current   = 1</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Transform and Load DimPassenger\OLE DB Command.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
-                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Transform and Load DimPassenger\OLE DB Command.Inputs[OLE DB Command Input]"
-                  description="New Input"
-                  errorOrTruncationOperation="Command Execution"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Command Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\OLE DB Command.Inputs[OLE DB Command Input].Columns[passenger_id_conv]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="passenger_id_conv"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_id_conv]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="Param_0">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Transform and Load DimPassenger\OLE DB Command.Outputs[OLE DB Command Output]"
-                  exclusionGroup="1"
-                  name="OLE DB Command Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\OLE DB Command.Inputs[OLE DB Command Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Transform and Load DimPassenger\OLE DB Command.Outputs[OLE DB Command Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Command Error Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\OLE DB Command.Inputs[OLE DB Command Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Transform and Load DimPassenger\OLE DB Command 1"
-              componentClassID="Microsoft.OLEDBCommand"
-              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
-              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
-              name="OLE DB Command 1"
-              usesDispositions="true"
-              version="2">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE dbo.DimPassenger
-SET    contact_data = ?,
-       travel_tier  = ?
-WHERE  passenger_id = ?
-  AND  is_current   = 1</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
-                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input]"
-                  errorOrTruncationOperation="Command Execution"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Command Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[contact_data_conv]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="contact_data_conv"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[contact_data_conv]" />
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[travel_tier_derived]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="30"
-                      cachedName="travel_tier_derived"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      lineageId="Package\Transform and Load DimPassenger\Add travel_tier.Outputs[Derived Column Output].Columns[travel_tier_derived]" />
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input].Columns[passenger_id_conv]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="passenger_id_conv"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_id_conv]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
-                      dataType="wstr"
-                      length="100"
-                      name="Param_0">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">65</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      name="Param_1">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">1</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="Param_2">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">17</property>
-                      </properties>
-                    </externalMetadataColumn>
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Outputs[OLE DB Command Output]"
-                  exclusionGroup="1"
-                  name="OLE DB Command Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Outputs[OLE DB Command Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Command Error Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Transform and Load DimPassenger\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Transform and Load DimPassenger\OLE DB Command 1.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension"
-              componentClassID="Microsoft.SCD"
-              contactInfo="Slowly Changing Dimension;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;3"
-              description="Updates a SQL Server Analysis Services data warehouse dimension. Update dimension records that are already present and  insert dimension records that aren't. For example, update the DimProduct table of the AdventureWorksDW OLAP database with data from the Products table in the AdventureWorks OLTP database."
-              name="Slowly Changing Dimension"
-              version="3">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the SELECT statement used to create a schema rowset."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [contact_data], [passenger_id], [passenger_name],[effective_date],[expiry_date] FROM [dbo].[DimPassenger]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the WHERE clause in the SELECT statement that selects the current row among rows with identical business keys."
-                  name="CurrentRowWhere">[effective_date] IS NOT NULL AND [expiry_date] IS NULL</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether historical attribute updates are directed to the transformation output for changing attribute updates."
-                  name="UpdateChangingAttributeHistory">true</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the transformation fails when columns with fixed attributes contain changes."
-                  name="FailOnFixedAttributeChange">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the column name for the inferred member."
-                  name="InferredMemberIndicator"></property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether inferred member updates are detected."
-                  name="EnableInferredMember">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the transformation fails when a lookup of an existing record fails."
-                  name="FailOnLookupFailure">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies that all rows in the input are new or the transformation detects the change type."
-                  name="IncomingRowChangeType"
-                  typeConverter="IncomingRowChangeType">1</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Connections[LookupConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
-                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-VCO30B3\MSSQLSERVER3.AirlinesDW]"
-                  description="Defines the connection to use for lookups in the dimension table"
-                  name="LookupConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]"
-                  name="Slowly Changing Dimension Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[contact_data_conv]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="contact_data_conv"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[contact_data]"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[contact_data_conv]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          name="ColumnType"
-                          typeConverter="ColumnType">2</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[passenger_id_conv]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="passenger_id_conv"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[passenger_id]"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_id_conv]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          name="ColumnType"
-                          typeConverter="ColumnType">1</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].Columns[passenger_name_conv]"
-                      cachedDataType="wstr"
-                      cachedLength="200"
-                      cachedName="passenger_name_conv"
-                      externalMetadataColumnId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[passenger_name]"
-                      lineageId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_name_conv]">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          name="ColumnType"
-                          typeConverter="ColumnType">3</property>
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[contact_data]"
-                      dataType="wstr"
-                      length="100"
-                      name="contact_data" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[passenger_id]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="passenger_id" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[passenger_name]"
-                      dataType="wstr"
-                      length="200"
-                      name="passenger_name" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[effective_date]"
-                      dataType="dbTimeStamp"
-                      name="effective_date" />
-                    <externalMetadataColumn
-                      refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input].ExternalColumns[expiry_date]"
-                      dataType="dbTimeStamp"
-                      name="expiry_date" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Outputs[Unchanged Output]"
-                  description="Unchanged rows"
-                  exclusionGroup="1"
-                  name="Unchanged Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Outputs[New Output]"
-                  description="New rows"
-                  exclusionGroup="1"
-                  name="New Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Outputs[Fixed Attribute Output]"
-                  description="Rows with changes in columns tagged FixedAttribute"
-                  exclusionGroup="1"
-                  name="Fixed Attribute Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Outputs[Changing Attribute Updates Output]"
-                  description="These rows contain new information for ChangingAttribute (Type 1) column changes"
-                  exclusionGroup="1"
-                  name="Changing Attribute Updates Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Outputs[Historical Attribute Inserts Output]"
-                  description="HistoricalAttribute (Type 2) changes result in these new rows"
-                  exclusionGroup="2"
-                  name="Historical Attribute Inserts Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Outputs[Inferred Member Updates Output]"
-                  description="Information to update unpopulated initial dimension row"
-                  exclusionGroup="1"
-                  name="Inferred Member Updates Output"
-                  synchronousInputId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]">
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-          </components>
-          <paths>
-            <path
-              refId="Package\Transform and Load DimPassenger.Paths[Changing Attribute Updates Output]"
-              endId="Package\Transform and Load DimPassenger\OLE DB Command 1.Inputs[OLE DB Command Input]"
-              name="Changing Attribute Updates Output"
-              startId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Outputs[Changing Attribute Updates Output]" />
-            <path
-              refId="Package\Transform and Load DimPassenger.Paths[Data Conversion Output]"
-              endId="Package\Transform and Load DimPassenger\Add travel_tier.Inputs[Derived Column Input]"
-              name="Data Conversion Output"
-              startId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Outputs[Data Conversion Output]" />
-            <path
-              refId="Package\Transform and Load DimPassenger.Paths[Derived Column Output]"
-              endId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Inputs[Slowly Changing Dimension Input]"
-              name="Derived Column Output"
-              startId="Package\Transform and Load DimPassenger\Add travel_tier.Outputs[Derived Column Output]" />
-            <path
-              refId="Package\Transform and Load DimPassenger.Paths[Derived Column Output1]"
-              endId="Package\Transform and Load DimPassenger\OLE DB Command.Inputs[OLE DB Command Input]"
-              name="Derived Column Output"
-              startId="Package\Transform and Load DimPassenger\Derived Column.Outputs[Derived Column Output]" />
-            <path
-              refId="Package\Transform and Load DimPassenger.Paths[Derived Column Output2]"
-              endId="Package\Transform and Load DimPassenger\Insert Destination.Inputs[OLE DB Destination Input]"
-              name="Derived Column Output"
-              startId="Package\Transform and Load DimPassenger\Derived Column 1.Outputs[Derived Column Output]" />
-            <path
-              refId="Package\Transform and Load DimPassenger.Paths[Historical Attribute Inserts Output]"
-              endId="Package\Transform and Load DimPassenger\Derived Column.Inputs[Derived Column Input]"
-              name="Historical Attribute Inserts Output"
-              startId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Outputs[Historical Attribute Inserts Output]" />
-            <path
-              refId="Package\Transform and Load DimPassenger.Paths[New Output]"
-              endId="Package\Transform and Load DimPassenger\Derived Column 1.Inputs[Derived Column Input]"
-              name="New Output"
-              startId="Package\Transform and Load DimPassenger\Slowly Changing Dimension.Outputs[New Output]" />
-            <path
-              refId="Package\Transform and Load DimPassenger.Paths[OLE DB Source Output]"
-              endId="Package\Transform and Load DimPassenger\Convert Passenger Columns.Inputs[Data Conversion Input]"
-              name="OLE DB Source Output"
-              startId="Package\Transform and Load DimPassenger\Extract from StgTickets.Outputs[OLE DB Source Output]" />
-          </paths>
-        </pipeline>
-      </DTS:ObjectData>
-    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
@@ -4450,16 +3331,16 @@ WHERE  passenger_id = ?
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{6A8EC159-1FE6-4539-8143-CB87BABB2BB6}"
+      DTS:DTSID="{CF3E1309-8E69-4180-B229-C6C88A9140C1}"
       DTS:From="Package\Transform and Load DimFareConditions"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\Transform and Load DimPassenger" />
+      DTS:To="Package\Load DimPassenger SCD2" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
       DTS:CreationName=""
-      DTS:DTSID="{E5C3AEC3-9CC9-4F4C-9427-C1F3D75CDEF0}"
-      DTS:From="Package\Transform and Load DimPassenger"
+      DTS:DTSID="{B09D89AD-EBEA-429A-86F2-C70A0F51BCE1}"
+      DTS:From="Package\Load DimPassenger SCD2"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
       DTS:To="Package\Load FactFlightSegments" />
@@ -4479,7 +3360,7 @@ WHERE  passenger_id = ?
         <NodeLayout
           Size="208,41.6"
           Id="Package\Load FactFlightSegments"
-          TopLeft="261.16666507307,416.933332529918" />
+          TopLeft="304.499996038775,414.333332547998" />
         <NodeLayout
           Size="162.4,41.6"
           Id="Package\Populate DimDate"
@@ -4495,11 +3376,7 @@ WHERE  passenger_id = ?
         <NodeLayout
           Size="264,41.6"
           Id="Package\Transform and Load DimFareConditions"
-          TopLeft="248.333319764999,220.999998463194" />
-        <NodeLayout
-          Size="243.2,41.6"
-          Id="Package\Transform and Load DimPassenger"
-          TopLeft="199.16665578468,287.733331332472" />
+          TopLeft="249.999986340603,235.733331694074" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="137.033330282735,60.666666534079">
@@ -4570,24 +3447,24 @@ WHERE  passenger_id = ?
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="293.899996311962,198.499998463194">
+          TopLeft="293.899996311962,200.199998752475">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="86.4333234530367,22.5"
+              EndConnector="88.0999900286406,35.5333329415986"
               Start="0,0"
-              End="86.4333234530367,15">
+              End="88.0999900286406,28.0333329415986">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="82.4333234530367,0" />
+                    End="84.0999900286406,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="82.4333234530367,0"
-                    Point2="86.4333234530367,0"
-                    Point3="86.4333234530367,4" />
+                    Point1="84.0999900286406,0"
+                    Point2="88.0999900286406,0"
+                    Point3="88.0999900286406,4" />
                   <mssgle:LineSegment
-                    End="86.4333234530367,15" />
+                    End="88.0999900286406,28.0333329415986" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4596,32 +3473,36 @@ WHERE  passenger_id = ?
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="203.2,41.6"
+          Id="Package\Load DimPassenger SCD2"
+          TopLeft="302.49998347213,308.999997884631" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="380.333319764999,262.599998463194">
+          TopLeft="381.999986340603,277.333331694074">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-59.566663980319,25.133332869278"
+              EndConnector="22.0999971315265,31.6666661905576"
               Start="0,0"
-              End="-59.566663980319,17.633332869278">
+              End="22.0999971315265,24.1666661905576">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.56666643463899" />
+                    End="0,11.8333330952788" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,8.56666643463899"
-                    Point2="0,12.566666434639"
-                    Point3="-4,12.566666434639" />
+                    Point1="0,11.8333330952788"
+                    Point2="0,15.8333330952788"
+                    Point3="4,15.8333330952788" />
                   <mssgle:LineSegment
-                    End="-55.566663980319,12.566666434639" />
+                    End="18.0999971315265,15.8333330952788" />
                   <mssgle:CubicBezierSegment
-                    Point1="-55.566663980319,12.566666434639"
-                    Point2="-59.566663980319,12.566666434639"
-                    Point3="-59.566663980319,16.566666434639" />
+                    Point1="18.0999971315265,15.8333330952788"
+                    Point2="22.0999971315265,15.8333330952788"
+                    Point3="22.0999971315265,19.8333330952788" />
                   <mssgle:LineSegment
-                    End="-59.566663980319,17.633332869278" />
+                    End="22.0999971315265,24.1666661905576" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4632,30 +3513,18 @@ WHERE  passenger_id = ?
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="320.76665578468,329.333331332472">
+          TopLeft="406.299989755452,350.599997884631">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="44.4000092883904,87.600001197446"
+              EndConnector="0,63.7333346633669"
               Start="0,0"
-              End="44.4000092883904,80.100001197446">
+              End="0,56.2333346633669">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,39.800000598723" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,39.800000598723"
-                    Point2="0,43.800000598723"
-                    Point3="4,43.800000598723" />
-                  <mssgle:LineSegment
-                    End="40.4000092883904,43.800000598723" />
-                  <mssgle:CubicBezierSegment
-                    Point1="40.4000092883904,43.800000598723"
-                    Point2="44.4000092883904,43.800000598723"
-                    Point3="44.4000092883904,47.800000598723" />
-                  <mssgle:LineSegment
-                    End="44.4000092883904,80.100001197446" />
+                    End="0,56.2333346633669" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4902,7 +3771,7 @@ WHERE  passenger_id = ?
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-32.7413873334229,23.1999997287988,96.3827734375,11.609375"
+              BoundingBox="-32.7413873334228,23.1999997287988,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -5121,7 +3990,7 @@ WHERE  passenger_id = ?
     design-time-name="Package\Transform and Load DimAircraft">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="156,41.6"
           Id="Package\Transform and Load DimAircraft\Load DimAircraft"
@@ -5161,9 +4030,7 @@ WHERE  passenger_id = ?
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5186,7 +4053,7 @@ WHERE  passenger_id = ?
     design-time-name="Package\Transform and Load DimAirport">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="153.6,41.6"
           Id="Package\Transform and Load DimAirport\Load DimAirport"
@@ -5226,9 +4093,7 @@ WHERE  passenger_id = ?
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="35.135526382625,35.6999992325901,41.1289453125,9.568359375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5251,7 +4116,7 @@ WHERE  passenger_id = ?
     design-time-name="Package\Transform and Load DimFareConditions">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="193.6,41.6"
           Id="Package\Transform and Load DimFareConditions\Load DimFareConditions"
@@ -5291,9 +4156,7 @@ WHERE  passenger_id = ?
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5307,344 +4170,17 @@ WHERE  passenger_id = ?
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\Transform and Load DimPassenger">
+  <DtsEventHandler
+    design-time-name="Package\Transform and Load DimAircraft.EventHandlers[OnPreExecute]">
     <LayoutInfo>
       <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="159.2,41.6"
-          Id="Package\Transform and Load DimPassenger\Insert Destination"
-          TopLeft="154.5,818.299999999999" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Transform and Load DimPassenger\Derived Column"
-          TopLeft="20.7000000000001,411.9" />
-        <NodeLayout
-          Size="211.2,41.6"
-          Id="Package\Transform and Load DimPassenger\Convert Passenger Columns"
-          TopLeft="128.5,107.1" />
-        <NodeLayout
-          Size="208,41.6"
-          Id="Package\Transform and Load DimPassenger\Slowly Changing Dimension"
-          TopLeft="130.1,310.3" />
-        <NodeLayout
-          Size="176,41.6"
-          Id="Package\Transform and Load DimPassenger\OLE DB Command 1"
-          TopLeft="295.1,411.9" />
-        <NodeLayout
-          Size="161.6,41.6"
-          Id="Package\Transform and Load DimPassenger\Derived Column 1"
-          TopLeft="155.383333219505,685.2833335518" />
-        <NodeLayout
-          Size="167.2,41.6"
-          Id="Package\Transform and Load DimPassenger\OLE DB Command"
-          TopLeft="15.9166660975252,548.166666425598" />
-        <NodeLayout
-          Size="185.6,41.6"
-          Id="Package\Transform and Load DimPassenger\Extract from StgTickets"
-          TopLeft="141.3,5.49999999999995" />
-        <NodeLayout
-          Size="145.6,41.6"
-          Id="Package\Transform and Load DimPassenger\Add travel_tier"
-          TopLeft="161.3,208.7" />
-        <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[OLE DB Source Output]"
-          TopLeft="234.1,47.1">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[New Output]"
-          TopLeft="235.141666609753,351.9">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,333.383333551801"
-              Start="0,0"
-              End="0,325.883333551801">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,325.883333551801" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-27.09138671875,157.2248699009,54.1827734375,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[Historical Attribute Inserts Output]"
-          TopLeft="184.1,351.9">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-87,59.9999999999999"
-              Start="0,0"
-              End="-87,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.506329113924" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,16.506329113924"
-                    Point2="0,20.506329113924"
-                    Point3="-4,20.506329113924" />
-                  <mssgle:LineSegment
-                    End="-83,20.506329113924" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-83,20.506329113924"
-                    Point2="-87,20.506329113924"
-                    Point3="-87,24.506329113924" />
-                  <mssgle:LineSegment
-                    End="-87,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-118.55638671875,25.506329113924,150.1127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[Derived Column Output2]"
-          TopLeft="235.141666609753,726.8833335518">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,91.4166664481988"
-              Start="0,0"
-              End="0,83.9166664481988">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,83.9166664481988" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[Derived Column Output1]"
-          TopLeft="98.3083330487626,453.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,94.6666664255989"
-              Start="0,0"
-              End="0,87.1666664255989">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,87.1666664255989" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[Derived Column Output]"
-          TopLeft="234.1,250.3">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[Data Conversion Output]"
-          TopLeft="234.1,148.7">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.9999999999999"
-              Start="0,0"
-              End="0,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Transform and Load DimPassenger.Paths[Changing Attribute Updates Output]"
-          TopLeft="284.1,351.9">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="99,59.9999999999999"
-              Start="0,0"
-              End="99,52.4999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.506329113924" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,16.506329113924"
-                    Point2="0,20.506329113924"
-                    Point3="4,20.506329113924" />
-                  <mssgle:LineSegment
-                    End="95,20.506329113924" />
-                  <mssgle:CubicBezierSegment
-                    Point1="95,20.506329113924"
-                    Point2="99,20.506329113924"
-                    Point3="99,24.506329113924" />
-                  <mssgle:LineSegment
-                    End="99,52.4999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-29.03390625,25.506329113924,157.0678125,11.6630859375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="164.8,41.6"
+          Id="Package\Transform and Load DimAircraft.EventHandlers[OnPreExecute]\Execute SQL Task"
+          TopLeft="464.99999307096,201.999996989965" />
       </GraphLayout>
     </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Transform and Load DimPassenger\Insert Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Transform and Load DimPassenger\Slowly Changing Dimension">
-    <Properties>
-      <Property>
-        <Name>SCDMetadata</Name>
-        <Value
-          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SCDWizardMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionID&gt;{B97725BF-6951-46A1-A01F-010D4FD37B66}&lt;/ConnectionID&gt;
-  &lt;TableName&gt;[dbo].[DimPassenger]&lt;/TableName&gt;
-  &lt;InputToColumnsCollection&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Convert Passenger Columns.Outputs[Data Conversion Output].Columns[contact_data_conv]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;contact_data&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_id_conv]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;passenger_id&lt;/ColumnName&gt;
-      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
-      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Convert Passenger Columns.Outputs[Data Conversion Output].Columns[passenger_name_conv]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;passenger_name&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;HistoricalAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-  &lt;/InputToColumnsCollection&gt;
-  &lt;GeneratedComponentsIdentificationStrings&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;Derived Column&lt;/anyType&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command&lt;/anyType&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;Union All&lt;/anyType&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;Derived Column 1&lt;/anyType&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;Insert Destination&lt;/anyType&gt;
-    &lt;anyType xsi:type="xsd:string"&gt;OLE DB Command 1&lt;/anyType&gt;
-  &lt;/GeneratedComponentsIdentificationStrings&gt;
-  &lt;FailFixedAttribute&gt;false&lt;/FailFixedAttribute&gt;
-  &lt;FailChangeAttribute&gt;true&lt;/FailChangeAttribute&gt;
-  &lt;UseStartEndDate&gt;true&lt;/UseStartEndDate&gt;
-  &lt;CurrentIndicatorColumn /&gt;
-  &lt;InferredIndicatorColumn /&gt;
-  &lt;ValueCurrent /&gt;
-  &lt;ValueExpired /&gt;
-  &lt;StartDateColumn&gt;effective_date&lt;/StartDateColumn&gt;
-  &lt;EndDateColumn&gt;expiry_date&lt;/EndDateColumn&gt;
-  &lt;DateVariable&gt;User::StartTime&lt;/DateVariable&gt;
-  &lt;EnableInferredSupport&gt;false&lt;/EnableInferredSupport&gt;
-&lt;/SCDWizardMetadata&gt;</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Transform and Load DimPassenger\Extract from StgTickets">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
+  </DtsEventHandler>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
