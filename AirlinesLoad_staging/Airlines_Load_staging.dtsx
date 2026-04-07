@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Airlines_Load_staging"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{C5749B6C-B37F-4829-91BB-37F0D30E4727}">
+  DTS:VersionBuild="27"
+  DTS:VersionGUID="{40A3668D-06D6-48EC-841F-1E705307AF51}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -135,7 +135,17 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{026A3346-D580-4BDD-A80B-9699A1FDC736}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Extract aircrafts to staging"
@@ -406,7 +416,7 @@
                 <input
                   refId="Package\Extract aircrafts to staging\Load data to aircrafts staging table.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
+                  errorRowDisposition="RedirectRow"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
@@ -481,6 +491,35 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Extract aircrafts to staging\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::ErrorRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Extract aircrafts to staging\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Extract aircrafts to staging\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Extract aircrafts to staging\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
             <path
@@ -488,6 +527,11 @@
               endId="Package\Extract aircrafts to staging\Load data to aircrafts staging table.Inputs[OLE DB Destination Input]"
               name="Flat File Source Output"
               startId="Package\Extract aircrafts to staging\Flat File Source.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\Extract aircrafts to staging.Paths[OLE DB Destination Error Output]"
+              endId="Package\Extract aircrafts to staging\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Destination Error Output"
+              startId="Package\Extract aircrafts to staging\Load data to aircrafts staging table.Outputs[OLE DB Destination Error Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -614,7 +658,7 @@
                 <input
                   refId="Package\Extract airports data to staging\Load data to airports staging table.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
+                  errorRowDisposition="RedirectRow"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
@@ -902,8 +946,42 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Extract airports data to staging\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::ErrorRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Extract airports data to staging\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Extract airports data to staging\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Extract airports data to staging\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
+            <path
+              refId="Package\Extract airports data to staging.Paths[OLE DB Destination Error Output]"
+              endId="Package\Extract airports data to staging\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Destination Error Output"
+              startId="Package\Extract airports data to staging\Load data to airports staging table.Outputs[OLE DB Destination Error Output]" />
             <path
               refId="Package\Extract airports data to staging.Paths[OLE DB Source Output]"
               endId="Package\Extract airports data to staging\Load data to airports staging table.Inputs[OLE DB Destination Input]"
@@ -1035,7 +1113,7 @@
                 <input
                   refId="Package\Extract boarding_passes to staging\Load data to boarding_passes staging table.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
+                  errorRowDisposition="RedirectRow"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
@@ -1275,8 +1353,42 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Extract boarding_passes to staging\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::ErrorRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Extract boarding_passes to staging\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Extract boarding_passes to staging\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Extract boarding_passes to staging\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
+            <path
+              refId="Package\Extract boarding_passes to staging.Paths[OLE DB Destination Error Output]"
+              endId="Package\Extract boarding_passes to staging\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Destination Error Output"
+              startId="Package\Extract boarding_passes to staging\Load data to boarding_passes staging table.Outputs[OLE DB Destination Error Output]" />
             <path
               refId="Package\Extract boarding_passes to staging.Paths[OLE DB Source Output]"
               endId="Package\Extract boarding_passes to staging\Load data to boarding_passes staging table.Inputs[OLE DB Destination Input]"
@@ -1408,7 +1520,7 @@
                 <input
                   refId="Package\Extract bookings to staging\Load data to bookings staging table.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
+                  errorRowDisposition="RedirectRow"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
@@ -1625,8 +1737,42 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Extract bookings to staging\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::ErrorRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Extract bookings to staging\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Extract bookings to staging\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Extract bookings to staging\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
+            <path
+              refId="Package\Extract bookings to staging.Paths[OLE DB Destination Error Output]"
+              endId="Package\Extract bookings to staging\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Destination Error Output"
+              startId="Package\Extract bookings to staging\Load data to bookings staging table.Outputs[OLE DB Destination Error Output]" />
             <path
               refId="Package\Extract bookings to staging.Paths[OLE DB Source Output]"
               endId="Package\Extract bookings to staging\Load data to bookings staging table.Inputs[OLE DB Destination Input]"
@@ -1758,7 +1904,7 @@
                 <input
                   refId="Package\Extract flights to staging\Load data to flights staging table.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
+                  errorRowDisposition="RedirectRow"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
@@ -2206,8 +2352,42 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Extract flights to staging\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::ErrorRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Extract flights to staging\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Extract flights to staging\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Extract flights to staging\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
+            <path
+              refId="Package\Extract flights to staging.Paths[OLE DB Destination Error Output]"
+              endId="Package\Extract flights to staging\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Destination Error Output"
+              startId="Package\Extract flights to staging\Load data to flights staging table.Outputs[OLE DB Destination Error Output]" />
             <path
               refId="Package\Extract flights to staging.Paths[OLE DB Source Output]"
               endId="Package\Extract flights to staging\Load data to flights staging table.Inputs[OLE DB Destination Input]"
@@ -2339,7 +2519,7 @@
                 <input
                   refId="Package\Extract routes to staging\Load data to routes staging table.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
+                  errorRowDisposition="RedirectRow"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
@@ -2792,8 +2972,42 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Extract routes to staging\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::ErrorRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Extract routes to staging\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Extract routes to staging\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Extract routes to staging\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
+            <path
+              refId="Package\Extract routes to staging.Paths[OLE DB Destination Error Output]"
+              endId="Package\Extract routes to staging\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Destination Error Output"
+              startId="Package\Extract routes to staging\Load data to routes staging table.Outputs[OLE DB Destination Error Output]" />
             <path
               refId="Package\Extract routes to staging.Paths[OLE DB Source Output]"
               endId="Package\Extract routes to staging\Load data to routes staging table.Inputs[OLE DB Destination Input]"
@@ -3074,7 +3288,7 @@
                 <input
                   refId="Package\Extract seats to staging\Load data to seats staging table.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
+                  errorRowDisposition="RedirectRow"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
@@ -3151,6 +3365,35 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Extract seats to staging\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::ErrorRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Extract seats to staging\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Extract seats to staging\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Extract seats to staging\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
             <path
@@ -3158,6 +3401,11 @@
               endId="Package\Extract seats to staging\Load data to seats staging table.Inputs[OLE DB Destination Input]"
               name="Flat File Source Output"
               startId="Package\Extract seats to staging\Flat File Source.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\Extract seats to staging.Paths[OLE DB Destination Error Output]"
+              endId="Package\Extract seats to staging\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Destination Error Output"
+              startId="Package\Extract seats to staging\Load data to seats staging table.Outputs[OLE DB Destination Error Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -3284,7 +3532,7 @@
                 <input
                   refId="Package\Extract tickets to staging\Load data to tickets staging table.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
+                  errorRowDisposition="RedirectRow"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
@@ -3567,8 +3815,42 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Extract tickets to staging\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::ErrorRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Extract tickets to staging\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Extract tickets to staging\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Extract tickets to staging\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
+            <path
+              refId="Package\Extract tickets to staging.Paths[OLE DB Destination Error Output]"
+              endId="Package\Extract tickets to staging\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Destination Error Output"
+              startId="Package\Extract tickets to staging\Load data to tickets staging table.Outputs[OLE DB Destination Error Output]" />
             <path
               refId="Package\Extract tickets to staging.Paths[OLE DB Source Output]"
               endId="Package\Extract tickets to staging\Load data to tickets staging table.Inputs[OLE DB Destination Input]"
@@ -3700,7 +3982,7 @@
                 <input
                   refId="Package\Extract ticket_flights to staging\Load data to ticket_flights staging table.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
+                  errorRowDisposition="RedirectRow"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
@@ -3940,8 +4222,42 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Extract ticket_flights to staging\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::ErrorRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Extract ticket_flights to staging\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Extract ticket_flights to staging\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Extract ticket_flights to staging\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
+            <path
+              refId="Package\Extract ticket_flights to staging.Paths[OLE DB Destination Error Output]"
+              endId="Package\Extract ticket_flights to staging\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Destination Error Output"
+              startId="Package\Extract ticket_flights to staging\Load data to ticket_flights staging table.Outputs[OLE DB Destination Error Output]" />
             <path
               refId="Package\Extract ticket_flights to staging.Paths[OLE DB Source Output]"
               endId="Package\Extract ticket_flights to staging\Load data to ticket_flights staging table.Inputs[OLE DB Destination Input]"
@@ -3949,6 +4265,276 @@
               startId="Package\Extract ticket_flights to staging\OLE DB Source.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log Aircraft Load Errors"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3A3FDE09-8979-4CE7-AA75-17063CD1FE42}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log Aircraft Load Errors"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="5">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CCB98356-8606-4ADE-95A1-B75184874646}"
+          SQLTask:SqlStatementSource="IF ? &gt; 0&#xA;BEGIN&#xA;    EXEC dbo.LogETLError&#xA;        @package_name      = 'Airlines_Load_staging',&#xA;        @task_name         = 'Extract aircrafts to staging',&#xA;        @error_code        = -1,&#xA;        @error_description = 'Rows failed during OLE DB insert',&#xA;        @source_table      = 'StgAircrafts',&#xA;        @error_row_count   = ?&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log Airports Load Errors"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D323F37E-B2E8-4768-8087-E45867CD0DCE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log Airports Load Errors"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CCB98356-8606-4ADE-95A1-B75184874646}"
+          SQLTask:SqlStatementSource="IF ? &gt; 0&#xA;BEGIN&#xA;    EXEC dbo.LogETLError&#xA;        @package_name      = 'Airlines_Load_staging',&#xA;        @task_name         = 'Extract airports to staging',&#xA;        @error_code        = -1,&#xA;        @error_description = 'Rows failed during OLE DB insert',&#xA;        @source_table      = 'StgAirports',&#xA;        @error_row_count   = ?&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log boarding_passes Load Errors"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1CE3D3B6-26E6-4CBE-8F78-01674AB2D7B8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log boarding_passes Load Errors"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="6">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CCB98356-8606-4ADE-95A1-B75184874646}"
+          SQLTask:SqlStatementSource="IF ? &gt; 0&#xA;BEGIN&#xA;    EXEC dbo.LogETLError&#xA;        @package_name      = 'Airlines_Load_staging',&#xA;        @task_name         = 'Extract boarding_passes to staging',&#xA;        @error_code        = -1,&#xA;        @error_description = 'Rows failed during OLE DB insert',&#xA;        @source_table      = 'StgBoarding_passes',&#xA;        @error_row_count   = ?&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log Bookings Load errors"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{AB394A32-9E8F-4D81-9D06-C23E04909B52}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log Bookings Load errors"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CCB98356-8606-4ADE-95A1-B75184874646}"
+          SQLTask:SqlStatementSource="IF ? &gt; 0&#xA;BEGIN&#xA;    EXEC dbo.LogETLError&#xA;        @package_name      = 'Airlines_Load_staging',&#xA;        @task_name         = 'Extract bookings to staging',&#xA;        @error_code        = -1,&#xA;        @error_description = 'Rows failed during OLE DB insert',&#xA;        @source_table      = 'StgBookings',&#xA;        @error_row_count   = ?&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log flights Load Errors"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E93DA6EF-9355-4C2E-B6AC-79607B70563D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log flights Load Errors"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="7">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CCB98356-8606-4ADE-95A1-B75184874646}"
+          SQLTask:SqlStatementSource="IF ? &gt; 0&#xA;BEGIN&#xA;    EXEC dbo.LogETLError&#xA;        @package_name      = 'Airlines_Load_staging',&#xA;        @task_name         = 'Extract flights to staging',&#xA;        @error_code        = -1,&#xA;        @error_description = 'Rows failed during OLE DB insert',&#xA;        @source_table      = 'StgFlights',&#xA;        @error_row_count   = ?&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log Routes Load Errors"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{06FD50B9-561E-448A-BA57-0E45C0405B45}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log Routes Load Errors"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CCB98356-8606-4ADE-95A1-B75184874646}"
+          SQLTask:SqlStatementSource="IF ? &gt; 0&#xA;BEGIN&#xA;    EXEC dbo.LogETLError&#xA;        @package_name      = 'Airlines_Load_staging',&#xA;        @task_name         = 'Extract routes to staging',&#xA;        @error_code        = -1,&#xA;        @error_description = 'Rows failed during OLE DB insert',&#xA;        @source_table      = 'StgRoutes',&#xA;        @error_row_count   = ?&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log seats Load Errors"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{57A0142C-3EDD-4ACE-8C57-20E5781B6CAB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log seats Load Errors"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="8">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CCB98356-8606-4ADE-95A1-B75184874646}"
+          SQLTask:SqlStatementSource="IF ? &gt; 0&#xA;BEGIN&#xA;    EXEC dbo.LogETLError&#xA;        @package_name      = 'Airlines_Load_staging',&#xA;        @task_name         = 'Extract seats to staging',&#xA;        @error_code        = -1,&#xA;        @error_description = 'Rows failed during OLE DB insert',&#xA;        @source_table      = 'StgSeats',&#xA;        @error_row_count   = ?&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log tickets Load Errors"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{64359AE5-3ACD-46B6-81FB-97325F862BB7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log tickets Load Errors"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="4">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CCB98356-8606-4ADE-95A1-B75184874646}"
+          SQLTask:SqlStatementSource="IF ? &gt; 0&#xA;BEGIN&#xA;    EXEC dbo.LogETLError&#xA;        @package_name      = 'Airlines_Load_staging',&#xA;        @task_name         = 'Extract tickets to staging',&#xA;        @error_code        = -1,&#xA;        @error_description = 'Rows failed during OLE DB insert',&#xA;        @source_table      = 'StgTickets',&#xA;        @error_row_count   = ?&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log ticket_flights Load Errors"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DFE9F242-7065-4C81-AFFE-6342D9086BFC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log ticket_flights Load Errors"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CCB98356-8606-4ADE-95A1-B75184874646}"
+          SQLTask:SqlStatementSource="IF ? &gt; 0&#xA;BEGIN&#xA;    EXEC dbo.LogETLError&#xA;        @package_name      = 'Airlines_Load_staging',&#xA;        @task_name         = 'Extract ticket_flights to staging',&#xA;        @error_code        = -1,&#xA;        @error_description = 'Rows failed during OLE DB insert',&#xA;        @source_table      = 'StgTicket_flights',&#xA;        @error_row_count   = ?&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::ErrorRowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -3969,6 +4555,69 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\Extract ticket_flights to staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{4F8121AB-E48A-4730-8A3B-A85538BF9C5D}"
+      DTS:From="Package\Extract tickets to staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\Log tickets Load Errors"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 11]"
+      DTS:CreationName=""
+      DTS:DTSID="{BA7853BC-6E53-4B65-BCA3-EEFFEC86CD15}"
+      DTS:From="Package\Extract ticket_flights to staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 11"
+      DTS:To="Package\Log ticket_flights Load Errors"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 12]"
+      DTS:CreationName=""
+      DTS:DTSID="{C41A2106-DCCB-415E-814A-1E560332990C}"
+      DTS:From="Package\Extract boarding_passes to staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 12"
+      DTS:To="Package\Log boarding_passes Load Errors"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 13]"
+      DTS:CreationName=""
+      DTS:DTSID="{D5AA96A5-1395-4BF9-9BD2-2D4D192C26CA}"
+      DTS:From="Package\Extract flights to staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 13"
+      DTS:To="Package\Log flights Load Errors"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 14]"
+      DTS:CreationName=""
+      DTS:DTSID="{0FBDD27F-AEC2-4359-A387-1A700280A253}"
+      DTS:From="Package\Extract routes to staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 14"
+      DTS:To="Package\Log Routes Load Errors"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 15]"
+      DTS:CreationName=""
+      DTS:DTSID="{62FA7B6B-089A-4E20-BC8E-1A77AC5CB077}"
+      DTS:From="Package\Extract airports data to staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 15"
+      DTS:To="Package\Log Airports Load Errors"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 16]"
+      DTS:CreationName=""
+      DTS:DTSID="{69DA755D-2E2D-47EF-ADF2-72FC9DA85092}"
+      DTS:From="Package\Extract seats to staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 16"
+      DTS:To="Package\Log seats Load Errors"
+      DTS:Value="2" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
@@ -4017,7 +4666,90 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 7"
       DTS:To="Package\Extract seats to staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{92E8AF0C-BCF5-4CF9-ACBE-97E95A799DF1}"
+      DTS:From="Package\Extract aircrafts to staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Log Aircraft Load Errors"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{AA353D5E-31C9-467F-ABE3-E4A17962921D}"
+      DTS:From="Package\Extract bookings to staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\Log Bookings Load errors"
+      DTS:Value="2" />
   </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{AD625437-2037-4456-95DD-C2231DE70D3A}"
+      DTS:EventID="-422401696"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{B5C43C03-EE93-45DC-BA23-E6F79AC7BAF2}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F2645EC1-BDF2-45D2-8AC1-315474D502B7}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{CCB98356-8606-4ADE-95A1-B75184874646}"
+              SQLTask:SqlStatementSource="EXEC dbo.LogETLError&#xA;    @package_name      = ?,&#xA;    @task_name         = ?,&#xA;    @error_code        = ?,&#xA;    @error_description = ?,&#xA;    @source_table      = 'N/A',&#xA;    @error_row_count   = 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::SourceName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="System::ErrorCode"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="System::ErrorDescription"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -4029,7 +4761,11 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\Extract aircrafts to staging"
+          TopLeft="434.999976232649,511.333329777585" />
         <NodeLayout
           Size="219.2,41.6"
           Id="Package\Extract airports data to staging"
@@ -4037,7 +4773,7 @@
         <NodeLayout
           Size="240.8,41.6"
           Id="Package\Extract boarding_passes to staging"
-          TopLeft="180.833323453036,226.199998427033" />
+          TopLeft="167.976180568524,229.258821953764" />
         <NodeLayout
           Size="203.2,41.6"
           Id="Package\Extract bookings to staging"
@@ -4051,39 +4787,43 @@
           Id="Package\Extract routes to staging"
           TopLeft="321.666649091576,373.533330735829" />
         <NodeLayout
+          Size="186.4,41.6"
+          Id="Package\Extract seats to staging"
+          TopLeft="560.833304677574,594.329407720113" />
+        <NodeLayout
           Size="218.4,41.6"
           Id="Package\Extract ticket_flights to staging"
           TopLeft="143.333325501946,159.466665557755" />
         <NodeLayout
           Size="191.2,41.6"
           Id="Package\Extract tickets to staging"
-          TopLeft="76.6666624777849,86.6666660639975" />
+          TopLeft="73.8095196145599,85.1372543006322" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="136.599998087684,58.0666665521595">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="35.6666643901007,28.599999511838"
+              EndConnector="32.8095215268756,27.0705877484727"
               Start="0,0"
-              End="35.6666643901007,21.099999511838">
+              End="32.8095215268756,19.5705877484727">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,10.299999755919" />
+                    End="0,9.53529387423635" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,10.299999755919"
-                    Point2="0,14.299999755919"
-                    Point3="4,14.299999755919" />
+                    Point1="0,9.53529387423635"
+                    Point2="0,13.5352938742364"
+                    Point3="4,13.5352938742364" />
                   <mssgle:LineSegment
-                    End="31.6666643901007,14.299999755919" />
+                    End="28.8095215268756,13.5352938742364" />
                   <mssgle:CubicBezierSegment
-                    Point1="31.6666643901007,14.299999755919"
-                    Point2="35.6666643901007,14.299999755919"
-                    Point3="35.6666643901007,18.299999755919" />
+                    Point1="28.8095215268756,13.5352938742364"
+                    Point2="32.8095215268756,13.5352938742364"
+                    Point3="32.8095215268756,17.5352938742364" />
                   <mssgle:LineSegment
-                    End="35.6666643901007,21.099999511838" />
+                    End="32.8095215268756,19.5705877484727" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4094,30 +4834,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="172.266662477785,128.266666063998">
+          TopLeft="169.40951961456,126.737254300632">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="80.2666630241607,31.1999994937578"
+              EndConnector="83.1238058873861,32.7294112571228"
               Start="0,0"
-              End="80.2666630241607,23.6999994937578">
+              End="83.1238058873861,25.2294112571228">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,11.5999997468789" />
+                    End="0,12.3647056285614" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,11.5999997468789"
-                    Point2="0,15.5999997468789"
-                    Point3="4,15.5999997468789" />
+                    Point1="0,12.3647056285614"
+                    Point2="0,16.3647056285614"
+                    Point3="4,16.3647056285614" />
                   <mssgle:LineSegment
-                    End="76.2666630241607,15.5999997468789" />
+                    End="79.1238058873861,16.3647056285614" />
                   <mssgle:CubicBezierSegment
-                    Point1="76.2666630241607,15.5999997468789"
-                    Point2="80.2666630241607,15.5999997468789"
-                    Point3="80.2666630241607,19.5999997468789" />
+                    Point1="79.1238058873861,16.3647056285614"
+                    Point2="83.1238058873861,16.3647056285614"
+                    Point3="83.1238058873861,20.3647056285614" />
                   <mssgle:LineSegment
-                    End="80.2666630241607,23.6999994937578" />
+                    End="83.1238058873861,25.2294112571228" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4132,26 +4872,26 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="48.6999979510902,25.1333328692781"
+              EndConnector="35.8428550665777,28.1921563960086"
               Start="0,0"
-              End="48.6999979510902,17.6333328692781">
+              End="35.8428550665777,20.6921563960086">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.56666643463905" />
+                    End="0,10.0960781980043" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,8.56666643463905"
-                    Point2="0,12.566666434639"
-                    Point3="4,12.566666434639" />
+                    Point1="0,10.0960781980043"
+                    Point2="0,14.0960781980043"
+                    Point3="4,14.0960781980043" />
                   <mssgle:LineSegment
-                    End="44.6999979510902,12.566666434639" />
+                    End="31.8428550665777,14.0960781980043" />
                   <mssgle:CubicBezierSegment
-                    Point1="44.6999979510902,12.566666434639"
-                    Point2="48.6999979510902,12.566666434639"
-                    Point3="48.6999979510902,16.566666434639" />
+                    Point1="31.8428550665777,14.0960781980043"
+                    Point2="35.8428550665777,14.0960781980043"
+                    Point3="35.8428550665777,18.0960781980043" />
                   <mssgle:LineSegment
-                    End="48.6999979510902,17.6333328692781" />
+                    End="35.8428550665777,20.6921563960086" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4162,30 +4902,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="301.233323453036,267.799998427033">
+          TopLeft="288.376180568524,270.858821953764">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="53.9999956289931,32.0666661543978"
+              EndConnector="66.8571385135053,29.0078426276674"
               Start="0,0"
-              End="53.9999956289931,24.5666661543978">
+              End="66.8571385135053,21.5078426276674">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,12.0333330771989" />
+                    End="0,10.5039213138337" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,12.0333330771989"
-                    Point2="0,16.0333330771989"
-                    Point3="4,16.0333330771989" />
+                    Point1="0,10.5039213138337"
+                    Point2="0,14.5039213138337"
+                    Point3="4,14.5039213138337" />
                   <mssgle:LineSegment
-                    End="49.9999956289931,16.0333330771989" />
+                    End="62.8571385135053,14.5039213138337" />
                   <mssgle:CubicBezierSegment
-                    Point1="49.9999956289931,16.0333330771989"
-                    Point2="53.9999956289931,16.0333330771989"
-                    Point3="53.9999956289931,20.0333330771989" />
+                    Point1="62.8571385135053,14.5039213138337"
+                    Point2="66.8571385135053,14.5039213138337"
+                    Point3="66.8571385135053,18.5039213138337" />
                   <mssgle:LineSegment
-                    End="53.9999956289931,24.5666661543978" />
+                    End="66.8571385135053,21.5078426276674" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4262,10 +5002,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="198.4,41.6"
-          Id="Package\Extract aircrafts to staging"
-          TopLeft="434.999976232649,511.333329777585" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
           TopLeft="481.266646359696,485.999997721911">
@@ -4300,86 +5036,346 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="186.4,41.6"
-          Id="Package\Extract seats to staging"
-          TopLeft="525.833304603068,579.799995968143" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
           TopLeft="534.199976232649,552.933329777585">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="84.8333283704193,26.866666190558"
+              EndConnector="119.833328444925,41.3960779425283"
               Start="0,0"
-              End="84.8333283704193,19.366666190558">
+              End="119.833328444925,33.8960779425283">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,9.43333309527901" />
+                    End="0,16.6980389712642" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,9.43333309527901"
-                    Point2="0,13.433333095279"
-                    Point3="4,13.433333095279" />
+                    Point1="0,16.6980389712642"
+                    Point2="0,20.6980389712642"
+                    Point3="4,20.6980389712642" />
                   <mssgle:LineSegment
-                    End="80.8333283704193,13.433333095279" />
+                    End="115.833328444925,20.6980389712642" />
                   <mssgle:CubicBezierSegment
-                    Point1="80.8333283704193,13.433333095279"
-                    Point2="84.8333283704193,13.433333095279"
-                    Point3="84.8333283704193,17.433333095279" />
+                    Point1="115.833328444925,20.6980389712642"
+                    Point2="119.833328444925,20.6980389712642"
+                    Point3="119.833328444925,24.6980389712642" />
                   <mssgle:LineSegment
-                    End="84.8333283704193,19.366666190558" />
+                    End="119.833328444925,33.8960779425283" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="190.4,41.6"
+          Id="Package\Log Aircraft Load Errors"
+          TopLeft="184.28571467801,514.435293753677" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="434.999976232649,533.684311765631">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-60.3142615546389,0"
+              Start="0,0"
+              End="-52.8142615546389,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-52.8142615546389,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-51.7115839023195,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="197.6,41.6"
+          Id="Package\Log Bookings Load errors"
+          TopLeft="319.28571496539,14.5294117519703" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="238.199998087684,36.2980391520649">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="81.0857168777054,0"
+              Start="0,0"
+              End="73.5857168777054,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="73.5857168777054,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="11.4884053138527,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="186.4,41.6"
+          Id="Package\Log tickets Load Errors"
+          TopLeft="337.857143576352,84.1176469850912" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="265.00951961456,105.427450642862">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.8476239617921,0"
+              Start="0,0"
+              End="65.3476239617921,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="65.3476239617921,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="7.36935885589606,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="216,41.6"
+          Id="Package\Log ticket_flights Load Errors"
+          TopLeft="439.285715220838,157.529411626625" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="361.733325501946,179.29803859219">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="77.5523897188922,0"
+              Start="0,0"
+              End="70.0523897188922,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="70.0523897188922,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="9.72174173444609,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="234.4,41.6"
+          Id="Package\Log boarding_passes Load Errors"
+          TopLeft="500.714286780175,220.235293924602" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 12]"
+          TopLeft="408.776180568524,250.058821953764">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.9381062116512,-9.02352802916133"
+              Start="0,0"
+              End="84.4381062116512,-9.02352802916133">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="41.9690531058256,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41.9690531058256,0"
+                    Point2="45.9690531058256,0"
+                    Point3="45.9690531058256,-4" />
+                  <mssgle:LineSegment
+                    End="45.9690531058256,-5.02352802916133" />
+                  <mssgle:CubicBezierSegment
+                    Point1="45.9690531058256,-5.02352802916133"
+                    Point2="45.9690531058256,-9.02352802916133"
+                    Point3="49.9690531058256,-9.02352802916133" />
+                  <mssgle:LineSegment
+                    End="84.4381062116512,-9.02352802916133" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="20.6645999808256,1,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\Log flights Load Errors"
+          TopLeft="537.142858286293,295.129411626625" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 13]"
+          TopLeft="449.633319082029,318.298038104028">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="87.5095392042642,0"
+              Start="0,0"
+              End="80.0095392042642,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="80.0095392042642,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="14.7003164771321,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="188,41.6"
+          Id="Package\Log Routes Load Errors"
+          TopLeft="90.0000001915863,377.717646848351" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 14]"
+          TopLeft="321.666649091576,396.42548879209">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-43.6666488999897,0"
+              Start="0,0"
+              End="-36.1666488999897,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-36.1666488999897,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-43.3877775749948,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="192.8,41.6"
+          Id="Package\Log Airports Load Errors"
+          TopLeft="127.857143129317,447.305882081472" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 15]"
+          TopLeft="371.666646359696,466.652939901691">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-51.0095032303789,0"
+              Start="0,0"
+              End="-43.5095032303789,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-43.5095032303789,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-47.0592047401894,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="180,41.6"
+          Id="Package\Log seats Load Errors"
+          TopLeft="303.571429217653,599.32941138733" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 16]"
+          TopLeft="560.833304677574,617.629409553722">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-77.261875459921,0"
+              Start="0,0"
+              End="-69.761875459921,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-69.761875459921,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-60.1853908549605,5,50.60890625,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Extract airports data to staging">
+    design-time-name="Package\Extract aircrafts to staging">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="152,41.6"
-          Id="Package\Extract airports data to staging\OLE DB Source"
-          TopLeft="299.999983608723,73.6666661543979" />
+          Size="237.6,41.6"
+          Id="Package\Extract aircrafts to staging\Load data to aircrafts staging table"
+          TopLeft="412.99999384582,177.999997347593" />
         <NodeLayout
-          Size="235.2,41.6"
-          Id="Package\Extract airports data to staging\Load data to airports staging table"
-          TopLeft="284.999984428287,163.799998860955" />
+          Size="151.2,41.6"
+          Id="Package\Extract aircrafts to staging\Flat File Source"
+          TopLeft="357.999994665384,90.9999986439943" />
         <EdgeLayout
-          Id="Package\Extract airports data to staging.Paths[OLE DB Source Output]"
-          TopLeft="375.999983608723,115.266666154398">
+          Id="Package\Extract aircrafts to staging.Paths[Flat File Source Output]"
+          TopLeft="433.599994665384,132.599998643994">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="26.6000008195637,48.5333327065574"
+              EndConnector="98.1999991804361,45.399998703599"
               Start="0,0"
-              End="26.6000008195637,41.0333327065574">
+              End="98.1999991804361,37.899998703599">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.2666663532787" />
+                    End="0,18.6999993517995" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,20.2666663532787"
-                    Point2="0,24.2666663532787"
-                    Point3="4,24.2666663532787" />
+                    Point1="0,18.6999993517995"
+                    Point2="0,22.6999993517995"
+                    Point3="4,22.6999993517995" />
                   <mssgle:LineSegment
-                    End="22.6000008195637,24.2666663532787" />
+                    End="94.1999991804361,22.6999993517995" />
                   <mssgle:CubicBezierSegment
-                    Point1="22.6000008195637,24.2666663532787"
-                    Point2="26.6000008195637,24.2666663532787"
-                    Point3="26.6000008195637,28.2666663532787" />
+                    Point1="94.1999991804361,22.6999993517995"
+                    Point2="98.1999991804361,22.6999993517995"
+                    Point3="98.1999991804361,26.6999993517995" />
                   <mssgle:LineSegment
-                    End="26.6000008195637,41.0333327065574" />
+                    End="98.1999991804361,37.899998703599" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4388,11 +5384,63 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Extract aircrafts to staging\Row Count"
+          TopLeft="444.285715231482,283.705882104262" />
+        <EdgeLayout
+          Id="Package\Extract aircrafts to staging.Paths[OLE DB Destination Error Output]"
+          TopLeft="531.79999384582,219.599997347593">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-22.714278614338,64.105884756669"
+              Start="0,0"
+              End="-22.714278614338,56.605884756669">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.0529423783345" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.0529423783345"
+                    Point2="0,32.0529423783345"
+                    Point3="-4,32.0529423783345" />
+                  <mssgle:LineSegment
+                    End="-18.714278614338,32.0529423783345" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.714278614338,32.0529423783345"
+                    Point2="-22.714278614338,32.0529423783345"
+                    Point3="-22.714278614338,36.0529423783345" />
+                  <mssgle:LineSegment
+                    End="-22.714278614338,56.605884756669" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-84.566045557169,37.0529423783345,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Extract aircrafts to staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="220.8,41.6"
+          Id="Package\Extract aircrafts to staging.EventHandlers[OnPreExecute]\Truncate aircrafts staging table"
+          TopLeft="408.999993905425,141.999997884035" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract airports data to staging\OLE DB Source">
+    design-time-name="Package\Extract aircrafts to staging\Load data to aircrafts staging table">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -4404,6 +5452,108 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Extract airports data to staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="235.2,41.6"
+          Id="Package\Extract airports data to staging\Load data to airports staging table"
+          TopLeft="284.999984428287,195.799998384118" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Extract airports data to staging\OLE DB Source"
+          TopLeft="299.999983608723,73.6666661543979" />
+        <EdgeLayout
+          Id="Package\Extract airports data to staging.Paths[OLE DB Source Output]"
+          TopLeft="375.999983608723,115.266666154398">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="26.600000819564,80.5333322297199"
+              Start="0,0"
+              End="26.600000819564,73.0333322297199">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.26666611486" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.26666611486"
+                    Point2="0,40.26666611486"
+                    Point3="4,40.26666611486" />
+                  <mssgle:LineSegment
+                    End="22.600000819564,40.26666611486" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.600000819564,40.26666611486"
+                    Point2="26.600000819564,40.26666611486"
+                    Point3="26.600000819564,44.26666611486" />
+                  <mssgle:LineSegment
+                    End="26.600000819564,73.0333322297199" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Extract airports data to staging\Row Count"
+          TopLeft="354.999994710088,288.999995693564" />
+        <EdgeLayout
+          Id="Package\Extract airports data to staging.Paths[OLE DB Destination Error Output]"
+          TopLeft="402.599984428287,237.399998384118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="17.2000102818008,51.5999973094466"
+              Start="0,0"
+              End="17.2000102818008,44.0999973094466">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.7999986547233" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.7999986547233"
+                    Point2="0,25.7999986547233"
+                    Point3="4,25.7999986547233" />
+                  <mssgle:LineSegment
+                    End="13.2000102818008,25.7999986547233" />
+                  <mssgle:CubicBezierSegment
+                    Point1="13.2000102818008,25.7999986547233"
+                    Point2="17.2000102818008,25.7999986547233"
+                    Point3="17.2000102818008,29.7999986547233" />
+                  <mssgle:LineSegment
+                    End="17.2000102818008,44.0999973094466" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-64.6089011090996,30.7999986547233,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Extract airports data to staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="218.4,41.6"
+          Id="Package\Extract airports data to staging.EventHandlers[OnPreExecute]\Truncate airports staging table"
+          TopLeft="324.999995157123,155.999997675419" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
     design-time-name="Package\Extract airports data to staging\Load data to airports staging table">
     <Properties>
@@ -4417,23 +5567,24 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package\Extract airports data to staging.EventHandlers[OnPreExecute]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="218.4,41.6"
-          Id="Package\Extract airports data to staging.EventHandlers[OnPreExecute]\Truncate airports staging table"
-          TopLeft="324.999995157123,155.999997675419" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract airports data to staging\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Extract boarding_passes to staging">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Extract boarding_passes to staging\OLE DB Source"
@@ -4476,22 +5627,49 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Extract boarding_passes to staging\Row Count"
+          TopLeft="425.999993652105,356.999994680286" />
+        <EdgeLayout
+          Id="Package\Extract boarding_passes to staging.Paths[OLE DB Destination Error Output]"
+          TopLeft="493.399994173646,283.599996393919">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73.3999982863666"
+              Start="0,0"
+              End="0,65.8999982863666">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.8999982863666" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-73.20890625,27.2332022681833,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Extract boarding_passes to staging\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
+  <DtsEventHandler
+    design-time-name="Package\Extract boarding_passes to staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="263.2,41.6"
+          Id="Package\Extract boarding_passes to staging.EventHandlers[OnPreExecute]\Truncate boarding_passes staging table"
+          TopLeft="438.99999345839,234.999996498227" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
     design-time-name="Package\Extract boarding_passes to staging\Load data to boarding_passes staging table">
     <Properties>
@@ -4505,23 +5683,24 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package\Extract boarding_passes to staging.EventHandlers[OnPreExecute]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="263.2,41.6"
-          Id="Package\Extract boarding_passes to staging.EventHandlers[OnPreExecute]\Truncate boarding_passes staging table"
-          TopLeft="438.99999345839,234.999996498227" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract boarding_passes to staging\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Extract bookings to staging">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Extract bookings to staging\OLE DB Source"
@@ -4564,22 +5743,61 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Extract bookings to staging\Row Count"
+          TopLeft="344.166661538184,392.499994151294" />
+        <EdgeLayout
+          Id="Package\Extract bookings to staging.Paths[OLE DB Destination Error Output]"
+          TopLeft="453.199995052815,354.599995335937">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-44.2333335146312,37.8999988153573"
+              Start="0,0"
+              End="-44.2333335146312,30.3999988153573">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.9499994076787" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.9499994076787"
+                    Point2="0,18.9499994076787"
+                    Point3="-4,18.9499994076787" />
+                  <mssgle:LineSegment
+                    End="-40.2333335146312,18.9499994076787" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-40.2333335146312,18.9499994076787"
+                    Point2="-44.2333335146312,18.9499994076787"
+                    Point3="-44.2333335146312,22.9499994076787" />
+                  <mssgle:LineSegment
+                    End="-44.2333335146312,30.3999988153573" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-95.3255730073156,23.9499994076787,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Extract bookings to staging\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
+  <DtsEventHandler
+    design-time-name="Package\Extract bookings to staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\Extract bookings to staging.EventHandlers[OnPreExecute]\Truncate bookings staging table"
+          TopLeft="415.999993801117,131.999998033047" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
     design-time-name="Package\Extract bookings to staging\Load data to bookings staging table">
     <Properties>
@@ -4593,23 +5811,24 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package\Extract bookings to staging.EventHandlers[OnPreExecute]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="225.6,41.6"
-          Id="Package\Extract bookings to staging.EventHandlers[OnPreExecute]\Truncate bookings staging table"
-          TopLeft="415.999993801117,131.999998033047" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract bookings to staging\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Extract flights to staging">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Extract flights to staging\OLE DB Source"
@@ -4652,22 +5871,49 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Extract flights to staging\Row Count"
+          TopLeft="444.999993368983,337.999994963408" />
+        <EdgeLayout
+          Id="Package\Extract flights to staging.Paths[OLE DB Destination Error Output]"
+          TopLeft="506.399993786216,276.599996498227">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.3999984651806"
+              Start="0,0"
+              End="0,53.8999984651806">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.8999984651806" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-73.20890625,21.2332023575903,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Extract flights to staging\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
+  <DtsEventHandler
+    design-time-name="Package\Extract flights to staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="211.2,41.6"
+          Id="Package\Extract flights to staging.EventHandlers[OnPreExecute]\Truncate flights staging table"
+          TopLeft="334.999995008111,95.9999985694886" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
     design-time-name="Package\Extract flights to staging\Load data to flights staging table">
     <Properties>
@@ -4681,23 +5927,24 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package\Extract flights to staging.EventHandlers[OnPreExecute]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="211.2,41.6"
-          Id="Package\Extract flights to staging.EventHandlers[OnPreExecute]\Truncate flights staging table"
-          TopLeft="334.999995008111,95.9999985694886" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract flights to staging\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Extract routes to staging">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Extract routes to staging\OLE DB Source"
@@ -4740,22 +5987,61 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Extract routes to staging\Row Count"
+          TopLeft="477.999992877245,303.999995470047" />
+        <EdgeLayout
+          Id="Package\Extract routes to staging.Paths[OLE DB Destination Error Output]"
+          TopLeft="510.79999409914,247.599996930361">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="31.999998778105,56.3999985396861"
+              Start="0,0"
+              End="31.999998778105,48.8999985396861">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.199999269843" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.199999269843"
+                    Point2="0,28.199999269843"
+                    Point3="4,28.199999269843" />
+                  <mssgle:LineSegment
+                    End="27.999998778105,28.199999269843" />
+                  <mssgle:CubicBezierSegment
+                    Point1="27.999998778105,28.199999269843"
+                    Point2="31.999998778105,28.199999269843"
+                    Point3="31.999998778105,32.199999269843" />
+                  <mssgle:LineSegment
+                    End="31.999998778105,48.8999985396861" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-57.2089068609475,33.199999269843,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Extract routes to staging\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
+  <DtsEventHandler
+    design-time-name="Package\Extract routes to staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="212.8,41.6"
+          Id="Package\Extract routes to staging.EventHandlers[OnPreExecute]\Truncate routes staging table"
+          TopLeft="279.999995827675,184.999997243285" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
     design-time-name="Package\Extract routes to staging\Load data to routes staging table">
     <Properties>
@@ -4769,23 +6055,127 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract routes to staging\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Extract seats to staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\Extract seats to staging\Load data to seats staging table"
+          TopLeft="411.999993860722,184.999997243285" />
+        <NodeLayout
+          Size="151.2,41.6"
+          Id="Package\Extract seats to staging\Flat File Source"
+          TopLeft="384.999994263053,84.9999987334013" />
+        <EdgeLayout
+          Id="Package\Extract seats to staging.Paths[Flat File Source Output]"
+          TopLeft="460.599994263053,126.599998733401">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="64.1999995976687,58.3999985098839"
+              Start="0,0"
+              End="64.1999995976687,50.8999985098839">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.1999992549419" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.1999992549419"
+                    Point2="0,29.1999992549419"
+                    Point3="4,29.1999992549419" />
+                  <mssgle:LineSegment
+                    End="60.1999995976687,29.1999992549419" />
+                  <mssgle:CubicBezierSegment
+                    Point1="60.1999995976687,29.1999992549419"
+                    Point2="64.1999995976687,29.1999992549419"
+                    Point3="64.1999995976687,33.1999992549419" />
+                  <mssgle:LineSegment
+                    End="64.1999995976687,50.8999985098839" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Extract seats to staging\Row Count"
+          TopLeft="458.999993160367,293.999995619059" />
+        <EdgeLayout
+          Id="Package\Extract seats to staging.Paths[OLE DB Destination Error Output]"
+          TopLeft="524.299993510544,226.599997243285">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67.3999983757737"
+              Start="0,0"
+              End="0,59.8999983757737">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.8999983757737" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-73.20890625,24.2332023128868,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <DtsEventHandler
-    design-time-name="Package\Extract routes to staging.EventHandlers[OnPreExecute]">
+    design-time-name="Package\Extract seats to staging.EventHandlers[OnPreExecute]">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="212.8,41.6"
-          Id="Package\Extract routes to staging.EventHandlers[OnPreExecute]\Truncate routes staging table"
-          TopLeft="279.999995827675,184.999997243285" />
+          Size="208.8,41.6"
+          Id="Package\Extract seats to staging.EventHandlers[OnPreExecute]\Truncate seats staging table"
+          TopLeft="389.999994188547,94.9999985843897" />
       </GraphLayout>
     </LayoutInfo>
   </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract seats to staging\Load data to seats staging table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Extract ticket_flights to staging">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="152,41.6"
           Id="Package\Extract ticket_flights to staging\OLE DB Source"
@@ -4828,22 +6218,61 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Extract ticket_flights to staging\Row Count"
+          TopLeft="432.999993547797,279.999995827675" />
+        <EdgeLayout
+          Id="Package\Extract ticket_flights to staging.Paths[OLE DB Destination Error Output]"
+          TopLeft="521.799994143844,229.599997198582">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-24.0000005960468,50.3999986290929"
+              Start="0,0"
+              End="-24.0000005960468,42.8999986290929">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.1999993145465" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.1999993145465"
+                    Point2="0,25.1999993145465"
+                    Point3="-4,25.1999993145465" />
+                  <mssgle:LineSegment
+                    End="-20.0000005960468,25.1999993145465" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-20.0000005960468,25.1999993145465"
+                    Point2="-24.0000005960468,25.1999993145465"
+                    Point3="-24.0000005960468,29.1999993145465" />
+                  <mssgle:LineSegment
+                    End="-24.0000005960468,42.8999986290929" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-85.2089065480234,30.1999993145465,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Extract ticket_flights to staging\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
+  <DtsEventHandler
+    design-time-name="Package\Extract ticket_flights to staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="241.6,41.6"
+          Id="Package\Extract ticket_flights to staging.EventHandlers[OnPreExecute]\Truncate ticket_flights staging table"
+          TopLeft="451.999993264675,78.9999988228083" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
     design-time-name="Package\Extract ticket_flights to staging\Load data to ticket_flights staging table">
     <Properties>
@@ -4857,31 +6286,32 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package\Extract ticket_flights to staging.EventHandlers[OnPreExecute]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="241.6,41.6"
-          Id="Package\Extract ticket_flights to staging.EventHandlers[OnPreExecute]\Truncate ticket_flights staging table"
-          TopLeft="451.999993264675,78.9999988228083" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Extract ticket_flights to staging\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Extract tickets to staging">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="152,41.6"
-          Id="Package\Extract tickets to staging\OLE DB Source"
-          TopLeft="338.999994948506,123.999998152256" />
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="230.4,41.6"
           Id="Package\Extract tickets to staging\Load data to tickets staging table"
           TopLeft="341.49999499321,204.499997034669" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Extract tickets to staging\OLE DB Source"
+          TopLeft="338.999994948506,123.999998152256" />
         <EdgeLayout
           Id="Package\Extract tickets to staging.Paths[OLE DB Source Output]"
           TopLeft="414.999994948506,165.599998152256">
@@ -4916,22 +6346,61 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Extract tickets to staging\Row Count"
+          TopLeft="427.999993622303,297.999995559454" />
+        <EdgeLayout
+          Id="Package\Extract tickets to staging.Paths[OLE DB Destination Error Output]"
+          TopLeft="456.69999499321,246.099997034669">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="36.0999986290931,51.899998524785"
+              Start="0,0"
+              End="36.0999986290931,44.399998524785">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.9499992623925" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.9499992623925"
+                    Point2="0,25.9499992623925"
+                    Point3="4,25.9499992623925" />
+                  <mssgle:LineSegment
+                    End="32.0999986290931,25.9499992623925" />
+                  <mssgle:CubicBezierSegment
+                    Point1="32.0999986290931,25.9499992623925"
+                    Point2="36.0999986290931,25.9499992623925"
+                    Point3="36.0999986290931,29.9499992623925" />
+                  <mssgle:LineSegment
+                    End="36.0999986290931,44.399998524785" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.1589069354535,30.9499992623925,146.4178125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Extract tickets to staging\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
+  <DtsEventHandler
+    design-time-name="Package\Extract tickets to staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="213.6,41.6"
+          Id="Package\Extract tickets to staging.EventHandlers[OnPreExecute]\Truncate tickets staging table"
+          TopLeft="297.999995559454,134.999997988343" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
     design-time-name="Package\Extract tickets to staging\Load data to tickets staging table">
     <Properties>
@@ -4945,70 +6414,8 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package\Extract tickets to staging.EventHandlers[OnPreExecute]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="213.6,41.6"
-          Id="Package\Extract tickets to staging.EventHandlers[OnPreExecute]\Truncate tickets staging table"
-          TopLeft="297.999995559454,134.999997988343" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
-  <TaskHost
-    design-time-name="Package\Extract aircrafts to staging">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="151.2,41.6"
-          Id="Package\Extract aircrafts to staging\Flat File Source"
-          TopLeft="357.999994665384,90.9999986439943" />
-        <NodeLayout
-          Size="237.6,41.6"
-          Id="Package\Extract aircrafts to staging\Load data to aircrafts staging table"
-          TopLeft="412.99999384582,177.999997347593" />
-        <EdgeLayout
-          Id="Package\Extract aircrafts to staging.Paths[Flat File Source Output]"
-          TopLeft="433.599994665384,132.599998643994">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="98.1999991804361,45.399998703599"
-              Start="0,0"
-              End="98.1999991804361,37.899998703599">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.6999993517995" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,18.6999993517995"
-                    Point2="0,22.6999993517995"
-                    Point3="4,22.6999993517995" />
-                  <mssgle:LineSegment
-                    End="94.1999991804361,22.6999993517995" />
-                  <mssgle:CubicBezierSegment
-                    Point1="94.1999991804361,22.6999993517995"
-                    Point2="98.1999991804361,22.6999993517995"
-                    Point3="98.1999991804361,26.6999993517995" />
-                  <mssgle:LineSegment
-                    End="98.1999991804361,37.899998703599" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract aircrafts to staging\Load data to aircrafts staging table">
+    design-time-name="Package\Extract tickets to staging\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -5021,89 +6428,14 @@
     </Properties>
   </PipelineComponentMetadata>
   <DtsEventHandler
-    design-time-name="Package\Extract aircrafts to staging.EventHandlers[OnPreExecute]">
+    design-time-name="Package.EventHandlers[OnError]">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="220.8,41.6"
-          Id="Package\Extract aircrafts to staging.EventHandlers[OnPreExecute]\Truncate aircrafts staging table"
-          TopLeft="408.999993905425,141.999997884035" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
-  <TaskHost
-    design-time-name="Package\Extract seats to staging">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="151.2,41.6"
-          Id="Package\Extract seats to staging\Flat File Source"
-          TopLeft="384.999994263053,84.9999987334013" />
-        <NodeLayout
-          Size="225.6,41.6"
-          Id="Package\Extract seats to staging\Load data to seats staging table"
-          TopLeft="411.999993860722,184.999997243285" />
-        <EdgeLayout
-          Id="Package\Extract seats to staging.Paths[Flat File Source Output]"
-          TopLeft="460.599994263053,126.599998733401">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="64.1999995976687,58.3999985098839"
-              Start="0,0"
-              End="64.1999995976687,50.8999985098839">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.1999992549419" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,25.1999992549419"
-                    Point2="0,29.1999992549419"
-                    Point3="4,29.1999992549419" />
-                  <mssgle:LineSegment
-                    End="60.1999995976687,29.1999992549419" />
-                  <mssgle:CubicBezierSegment
-                    Point1="60.1999995976687,29.1999992549419"
-                    Point2="64.1999995976687,29.1999992549419"
-                    Point3="64.1999995976687,33.1999992549419" />
-                  <mssgle:LineSegment
-                    End="64.1999995976687,50.8999985098839" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Extract seats to staging\Load data to seats staging table">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package\Extract seats to staging.EventHandlers[OnPreExecute]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="208.8,41.6"
-          Id="Package\Extract seats to staging.EventHandlers[OnPreExecute]\Truncate seats staging table"
-          TopLeft="389.999994188547,94.9999985843897" />
+          Size="162.4,41.6"
+          Id="Package.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="404.99999396503,110.999998345971" />
       </GraphLayout>
     </LayoutInfo>
   </DtsEventHandler>
