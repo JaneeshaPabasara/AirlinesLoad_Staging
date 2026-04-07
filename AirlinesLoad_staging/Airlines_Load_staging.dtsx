@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Airlines_Load_staging"
   DTS:PackageType="5"
-  DTS:VersionBuild="27"
-  DTS:VersionGUID="{40A3668D-06D6-48EC-841F-1E705307AF51}">
+  DTS:VersionBuild="28"
+  DTS:VersionGUID="{E1BB673E-50B8-4B41-8F7F-C7ED25607A95}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
