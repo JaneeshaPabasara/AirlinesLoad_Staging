@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="UpdateFactAirlines"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{CB8A99DE-D04E-403F-AA88-7292D498E3E3}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{E43A22EE-0E59-4A94-817D-BB5733C948AC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -767,51 +767,25 @@ WHERE  fact_id = ?
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="151.2,41.6"
-          Id="Package\Stage Completion Data\Flat File Source"
-          TopLeft="242.499986750385,78.8666661182377" />
-        <NodeLayout
-          Size="156,41.6"
-          Id="Package\Stage Completion Data\Data Conversion"
-          TopLeft="281.666651277079,177.666665431195" />
-        <EdgeLayout
-          Id="Package\Stage Completion Data.Paths[Flat File Source Output]"
-          TopLeft="318.099986750385,120.466666118238">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="41.5666645266945,57.1999993129571"
-              Start="0,0"
-              End="41.5666645266945,49.6999993129571">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,24.5999996564786" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,24.5999996564786"
-                    Point2="0,28.5999996564786"
-                    Point3="4,28.5999996564786" />
-                  <mssgle:LineSegment
-                    End="37.5666645266945,28.5999996564786" />
-                  <mssgle:CubicBezierSegment
-                    Point1="37.5666645266945,28.5999996564786"
-                    Point2="41.5666645266945,28.5999996564786"
-                    Point3="41.5666645266945,32.5999996564786" />
-                  <mssgle:LineSegment
-                    End="41.5666645266945,49.6999993129571" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="152.8,41.6"
+          Id="Package\Stage Completion Data\Derived Column"
+          TopLeft="364.166646769478,361.39999748687" />
         <NodeLayout
           Size="112.8,41.6"
           Id="Package\Stage Completion Data\Lookup"
           TopLeft="339.99998142322,269.533331459032" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Stage Completion Data\OLE DB Command"
+          TopLeft="369.999979784092,435.933330301907" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Stage Completion Data\Data Conversion"
+          TopLeft="281.666651277079,177.666665431195" />
+        <NodeLayout
+          Size="151.2,41.6"
+          Id="Package\Stage Completion Data\Flat File Source"
+          TopLeft="242.499986750385,78.8666661182377" />
         <EdgeLayout
           Id="Package\Stage Completion Data.Paths[Data Conversion Output]"
           TopLeft="359.666651277079,219.266665431195">
@@ -846,10 +820,6 @@ WHERE  fact_id = ?
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Stage Completion Data\Derived Column"
-          TopLeft="364.166646769478,361.39999748687" />
         <EdgeLayout
           Id="Package\Stage Completion Data.Paths[Lookup Match Output]"
           TopLeft="396.39998142322,311.133331459032">
@@ -886,10 +856,40 @@ WHERE  fact_id = ?
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="167.2,41.6"
-          Id="Package\Stage Completion Data\OLE DB Command"
-          TopLeft="369.999979784092,435.933330301907" />
+        <EdgeLayout
+          Id="Package\Stage Completion Data.Paths[Flat File Source Output]"
+          TopLeft="318.099986750385,120.466666118238">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="41.5666645266945,57.1999993129571"
+              Start="0,0"
+              End="41.5666645266945,49.6999993129571">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5999996564786" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.5999996564786"
+                    Point2="0,28.5999996564786"
+                    Point3="4,28.5999996564786" />
+                  <mssgle:LineSegment
+                    End="37.5666645266945,28.5999996564786" />
+                  <mssgle:CubicBezierSegment
+                    Point1="37.5666645266945,28.5999996564786"
+                    Point2="41.5666645266945,28.5999996564786"
+                    Point3="41.5666645266945,32.5999996564786" />
+                  <mssgle:LineSegment
+                    End="41.5666645266945,49.6999993129571" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Stage Completion Data.Paths[Derived Column Output]"
           TopLeft="440.566646769478,402.99999748687">
@@ -933,7 +933,7 @@ WHERE  fact_id = ?
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -943,7 +943,7 @@ WHERE  fact_id = ?
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>

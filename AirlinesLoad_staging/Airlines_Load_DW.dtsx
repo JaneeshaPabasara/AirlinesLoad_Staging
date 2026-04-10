@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="67"
-  DTS:VersionGUID="{9C29A792-39E6-4124-B506-DB882BB8DC4B}">
+  DTS:VersionBuild="72"
+  DTS:VersionGUID="{0C728440-8948-443F-B853-28C9E3E6F416}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -100,7 +100,24 @@
                 DTS:DataType="11">-1</DTS:VariableValue>
             </DTS:Variable>
           </DTS:Variables>
-          <DTS:Executables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Load FactFlightSegments.EventHandlers[OnPreExecute]\Execute SQL Task"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{2EEDBEF8-878F-41B9-AD72-DCDC25BE0DF5}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Execute SQL Task"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{B97725BF-6951-46A1-A01F-010D4FD37B66}"
+                  SQLTask:SqlStatementSource="truncate table dbo.FactFlightSegments" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
         </DTS:EventHandler>
       </DTS:EventHandlers>
       <DTS:ObjectData>
@@ -568,6 +585,28 @@
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
                           name="FriendlyExpression">flight_status_conv == "Cancelled" ? (DT_BOOL) TRUE  : (DT_BOOL) FALSE </property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load FactFlightSegments\Derived Column.Outputs[Derived Column Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DBTIMESTAMP)[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DBTIMESTAMP)GETDATE()</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -3358,6 +3397,10 @@ FROM dbo.StgSeats</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="203.2,41.6"
+          Id="Package\Load DimPassenger SCD2"
+          TopLeft="302.49998347213,308.999997884631" />
+        <NodeLayout
           Size="208,41.6"
           Id="Package\Load FactFlightSegments"
           TopLeft="304.499996038775,414.333332547998" />
@@ -3473,10 +3516,6 @@ FROM dbo.StgSeats</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="203.2,41.6"
-          Id="Package\Load DimPassenger SCD2"
-          TopLeft="302.49998347213,308.999997884631" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
           TopLeft="381.999986340603,277.333331694074">
@@ -3542,29 +3581,29 @@ FROM dbo.StgSeats</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="168.8,41.6"
-          Id="Package\Load FactFlightSegments\Lookup Aircraft Key"
-          TopLeft="184.999989892046,385.666663984789" />
-        <NodeLayout
-          Size="219.2,41.6"
-          Id="Package\Load FactFlightSegments\Insert into FactFlightSegments"
-          TopLeft="457.499975003303,595.666663008465" />
-        <NodeLayout
           Size="157.6,41.6"
           Id="Package\Load FactFlightSegments\Lookup Fare Key"
           TopLeft="256.666652643019,545.133329542544" />
-        <NodeLayout
-          Size="152.8,41.6"
-          Id="Package\Load FactFlightSegments\Derived Column"
-          TopLeft="144.99999207755,142.999999005596" />
         <NodeLayout
           Size="199.2,41.6"
           Id="Package\Load FactFlightSegments\Lookup Arrival Airport Key"
           TopLeft="154.999991531174,308.533331187831" />
         <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Load FactFlightSegments\Derived Column"
+          TopLeft="144.99999207755,142.999999005596" />
+        <NodeLayout
           Size="185.6,41.6"
           Id="Package\Load FactFlightSegments\Lookup Passenger Key"
           TopLeft="207.4999886627,463.666663442387" />
+        <NodeLayout
+          Size="191.2,41.6"
+          Id="Package\Load FactFlightSegments\Extract from Staging"
+          TopLeft="52.5000036880372,4.63333333936003" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Load FactFlightSegments\Lookup Aircraft Key"
+          TopLeft="184.999989892046,385.666663984789" />
         <NodeLayout
           Size="216,41.6"
           Id="Package\Load FactFlightSegments\Lookup Departure Airport Key"
@@ -3574,65 +3613,9 @@ FROM dbo.StgSeats</property>
           Id="Package\Load FactFlightSegments\Data Conversion"
           TopLeft="102.499994399647,75.3999994756778" />
         <NodeLayout
-          Size="191.2,41.6"
-          Id="Package\Load FactFlightSegments\Extract from Staging"
-          TopLeft="52.5000036880372,4.63333333936003" />
-        <EdgeLayout
-          Id="Package\Load FactFlightSegments.Paths[Derived Column Output]"
-          TopLeft="224.699992760519,184.599999005596">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,28.5999995118379"
-              Start="0,0"
-              End="0,21.0999995118379">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,21.0999995118379" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load FactFlightSegments.Paths[Data Conversion Output]"
-          TopLeft="180.499994399647,116.999999475678">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="40.8999976779025,25.9999995299181"
-              Start="0,0"
-              End="40.8999976779025,18.4999995299181">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,8.99999976495904" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,8.99999976495904"
-                    Point2="0,12.999999764959"
-                    Point3="4,12.999999764959" />
-                  <mssgle:LineSegment
-                    End="36.8999976779025,12.999999764959" />
-                  <mssgle:CubicBezierSegment
-                    Point1="36.8999976779025,12.999999764959"
-                    Point2="40.8999976779025,12.999999764959"
-                    Point3="40.8999976779025,16.999999764959" />
-                  <mssgle:LineSegment
-                    End="40.8999976779025,18.4999995299181" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="219.2,41.6"
+          Id="Package\Load FactFlightSegments\Insert into FactFlightSegments"
+          TopLeft="457.499975003303,595.666663008465" />
         <EdgeLayout
           Id="Package\Load FactFlightSegments.Paths[OLE DB Source Output]"
           TopLeft="148.100003688037,46.23333333936">
@@ -3847,45 +3830,77 @@ FROM dbo.StgSeats</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactFlightSegments.Paths[Derived Column Output]"
+          TopLeft="224.699992760519,184.599999005596">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.5999995118379"
+              Start="0,0"
+              End="0,21.0999995118379">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.0999995118379" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load FactFlightSegments.Paths[Data Conversion Output]"
+          TopLeft="180.499994399647,116.999999475678">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.8999976779025,25.9999995299181"
+              Start="0,0"
+              End="40.8999976779025,18.4999995299181">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.99999976495904" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.99999976495904"
+                    Point2="0,12.999999764959"
+                    Point3="4,12.999999764959" />
+                  <mssgle:LineSegment
+                    End="36.8999976779025,12.999999764959" />
+                  <mssgle:CubicBezierSegment
+                    Point1="36.8999976779025,12.999999764959"
+                    Point2="40.8999976779025,12.999999764959"
+                    Point3="40.8999976779025,16.999999764959" />
+                  <mssgle:LineSegment
+                    End="40.8999976779025,18.4999995299181" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load FactFlightSegments\Lookup Aircraft Key">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Load FactFlightSegments\Insert into FactFlightSegments">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
+  <DtsEventHandler
+    design-time-name="Package\Load FactFlightSegments.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package\Load FactFlightSegments.EventHandlers[OnPreExecute]\Execute SQL Task"
+          TopLeft="487.999992728233,137.99999794364" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
     design-time-name="Package\Load FactFlightSegments\Lookup Fare Key">
     <Properties>
@@ -3956,6 +3971,37 @@ FROM dbo.StgSeats</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
+    design-time-name="Package\Load FactFlightSegments\Extract from Staging">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load FactFlightSegments\Lookup Aircraft Key">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Load FactFlightSegments\Lookup Departure Airport Key">
     <Properties>
       <Property>
@@ -3979,10 +4025,15 @@ FROM dbo.StgSeats</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Load FactFlightSegments\Extract from Staging">
+    design-time-name="Package\Load FactFlightSegments\Insert into FactFlightSegments">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -4036,6 +4087,18 @@ FROM dbo.StgSeats</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Transform and Load DimAircraft.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Transform and Load DimAircraft.EventHandlers[OnPreExecute]\Execute SQL Task"
+          TopLeft="464.99999307096,201.999996989965" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <PipelineComponentMetadata
     design-time-name="Package\Transform and Load DimAircraft\Extract from StgAircrafts">
     <Properties>
@@ -4170,17 +4233,5 @@ FROM dbo.StgSeats</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package\Transform and Load DimAircraft.EventHandlers[OnPreExecute]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="164.8,41.6"
-          Id="Package\Transform and Load DimAircraft.EventHandlers[OnPreExecute]\Execute SQL Task"
-          TopLeft="464.99999307096,201.999996989965" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Airlines_Load_staging"
   DTS:PackageType="5"
-  DTS:VersionBuild="28"
-  DTS:VersionGUID="{E1BB673E-50B8-4B41-8F7F-C7ED25607A95}">
+  DTS:VersionBuild="31"
+  DTS:VersionGUID="{842AAD6E-5A9D-4F72-80AA-3C8B6B2BC5CF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1468,7 +1468,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[StgBookings]</property>
+                  name="OpenRowset">[dbo].[StgBookings]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -4306,7 +4306,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Log Airports Load Errors"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="6">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4336,7 +4336,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Log boarding_passes Load Errors"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="6">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4366,7 +4366,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Log Bookings Load errors"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4396,7 +4396,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Log flights Load Errors"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="7">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4456,7 +4456,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Log seats Load Errors"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="8">
+      DTS:ThreadHint="4">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4486,7 +4486,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Log tickets Load Errors"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="4">
+      DTS:ThreadHint="7">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4516,7 +4516,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Log ticket_flights Load Errors"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="8">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4798,6 +4798,42 @@
           Size="191.2,41.6"
           Id="Package\Extract tickets to staging"
           TopLeft="73.8095196145599,85.1372543006322" />
+        <NodeLayout
+          Size="190.4,41.6"
+          Id="Package\Log Aircraft Load Errors"
+          TopLeft="184.28571467801,514.435293753677" />
+        <NodeLayout
+          Size="192.8,41.6"
+          Id="Package\Log Airports Load Errors"
+          TopLeft="127.857143129317,447.305882081472" />
+        <NodeLayout
+          Size="234.4,41.6"
+          Id="Package\Log boarding_passes Load Errors"
+          TopLeft="500.714286780175,220.235293924602" />
+        <NodeLayout
+          Size="197.6,41.6"
+          Id="Package\Log Bookings Load errors"
+          TopLeft="319.28571496539,14.5294117519703" />
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\Log flights Load Errors"
+          TopLeft="537.142858286293,295.129411626625" />
+        <NodeLayout
+          Size="188,41.6"
+          Id="Package\Log Routes Load Errors"
+          TopLeft="90.0000001915863,377.717646848351" />
+        <NodeLayout
+          Size="180,41.6"
+          Id="Package\Log seats Load Errors"
+          TopLeft="303.571429217653,599.32941138733" />
+        <NodeLayout
+          Size="216,41.6"
+          Id="Package\Log ticket_flights Load Errors"
+          TopLeft="439.285715220838,157.529411626625" />
+        <NodeLayout
+          Size="186.4,41.6"
+          Id="Package\Log tickets Load Errors"
+          TopLeft="337.857143576352,84.1176469850912" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="136.599998087684,58.0666665521595">
@@ -4864,6 +4900,186 @@
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="265.00951961456,105.427450642862">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.8476239617921,0"
+              Start="0,0"
+              End="65.3476239617921,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="65.3476239617921,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="7.36935885589606,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="361.733325501946,179.29803859219">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="77.5523897188922,0"
+              Start="0,0"
+              End="70.0523897188922,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="70.0523897188922,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="9.72174173444609,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 12]"
+          TopLeft="408.776180568524,250.058821953764">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.9381062116512,-9.02352802916133"
+              Start="0,0"
+              End="84.4381062116512,-9.02352802916133">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="41.9690531058256,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41.9690531058256,0"
+                    Point2="45.9690531058256,0"
+                    Point3="45.9690531058256,-4" />
+                  <mssgle:LineSegment
+                    End="45.9690531058256,-5.02352802916133" />
+                  <mssgle:CubicBezierSegment
+                    Point1="45.9690531058256,-5.02352802916133"
+                    Point2="45.9690531058256,-9.02352802916133"
+                    Point3="49.9690531058256,-9.02352802916133" />
+                  <mssgle:LineSegment
+                    End="84.4381062116512,-9.02352802916133" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="20.6645999808256,1,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 13]"
+          TopLeft="449.633319082029,318.298038104028">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="87.5095392042642,0"
+              Start="0,0"
+              End="80.0095392042642,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="80.0095392042642,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="14.7003164771321,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 14]"
+          TopLeft="321.666649091576,396.42548879209">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-43.6666488999897,0"
+              Start="0,0"
+              End="-36.1666488999897,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-36.1666488999897,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-43.3877775749948,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 15]"
+          TopLeft="371.666646359696,466.652939901691">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-51.0095032303789,0"
+              Start="0,0"
+              End="-43.5095032303789,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-43.5095032303789,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-47.0592047401894,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 16]"
+          TopLeft="560.833304677574,617.629409553722">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-77.261875459921,0"
+              Start="0,0"
+              End="-69.761875459921,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-69.761875459921,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-60.1853908549605,5,50.60890625,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -5070,10 +5286,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="190.4,41.6"
-          Id="Package\Log Aircraft Load Errors"
-          TopLeft="184.28571467801,514.435293753677" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 8]"
           TopLeft="434.999976232649,533.684311765631">
@@ -5098,10 +5310,6 @@
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="197.6,41.6"
-          Id="Package\Log Bookings Load errors"
-          TopLeft="319.28571496539,14.5294117519703" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 9]"
           TopLeft="238.199998087684,36.2980391520649">
@@ -5126,222 +5334,30 @@
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="186.4,41.6"
-          Id="Package\Log tickets Load Errors"
-          TopLeft="337.857143576352,84.1176469850912" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 10]"
-          TopLeft="265.00951961456,105.427450642862">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="72.8476239617921,0"
-              Start="0,0"
-              End="65.3476239617921,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="65.3476239617921,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="7.36935885589606,5,50.60890625,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="216,41.6"
-          Id="Package\Log ticket_flights Load Errors"
-          TopLeft="439.285715220838,157.529411626625" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 11]"
-          TopLeft="361.733325501946,179.29803859219">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="77.5523897188922,0"
-              Start="0,0"
-              End="70.0523897188922,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="70.0523897188922,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="9.72174173444609,5,50.60890625,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="234.4,41.6"
-          Id="Package\Log boarding_passes Load Errors"
-          TopLeft="500.714286780175,220.235293924602" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 12]"
-          TopLeft="408.776180568524,250.058821953764">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="91.9381062116512,-9.02352802916133"
-              Start="0,0"
-              End="84.4381062116512,-9.02352802916133">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="41.9690531058256,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="41.9690531058256,0"
-                    Point2="45.9690531058256,0"
-                    Point3="45.9690531058256,-4" />
-                  <mssgle:LineSegment
-                    End="45.9690531058256,-5.02352802916133" />
-                  <mssgle:CubicBezierSegment
-                    Point1="45.9690531058256,-5.02352802916133"
-                    Point2="45.9690531058256,-9.02352802916133"
-                    Point3="49.9690531058256,-9.02352802916133" />
-                  <mssgle:LineSegment
-                    End="84.4381062116512,-9.02352802916133" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="20.6645999808256,1,50.60890625,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="184.8,41.6"
-          Id="Package\Log flights Load Errors"
-          TopLeft="537.142858286293,295.129411626625" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 13]"
-          TopLeft="449.633319082029,318.298038104028">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="87.5095392042642,0"
-              Start="0,0"
-              End="80.0095392042642,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="80.0095392042642,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="14.7003164771321,5,50.60890625,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="188,41.6"
-          Id="Package\Log Routes Load Errors"
-          TopLeft="90.0000001915863,377.717646848351" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 14]"
-          TopLeft="321.666649091576,396.42548879209">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-43.6666488999897,0"
-              Start="0,0"
-              End="-36.1666488999897,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-36.1666488999897,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-43.3877775749948,5,50.60890625,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="192.8,41.6"
-          Id="Package\Log Airports Load Errors"
-          TopLeft="127.857143129317,447.305882081472" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 15]"
-          TopLeft="371.666646359696,466.652939901691">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-51.0095032303789,0"
-              Start="0,0"
-              End="-43.5095032303789,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-43.5095032303789,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-47.0592047401894,5,50.60890625,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="180,41.6"
-          Id="Package\Log seats Load Errors"
-          TopLeft="303.571429217653,599.32941138733" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 16]"
-          TopLeft="560.833304677574,617.629409553722">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-77.261875459921,0"
-              Start="0,0"
-              End="-69.761875459921,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-69.761875459921,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-60.1853908549605,5,50.60890625,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="162.4,41.6"
+          Id="Package.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="404.99999396503,110.999998345971" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
   <TaskHost
     design-time-name="Package\Extract aircrafts to staging">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Extract aircrafts to staging\Row Count"
+          TopLeft="444.285715231482,283.705882104262" />
         <NodeLayout
           Size="237.6,41.6"
           Id="Package\Extract aircrafts to staging\Load data to aircrafts staging table"
@@ -5350,44 +5366,6 @@
           Size="151.2,41.6"
           Id="Package\Extract aircrafts to staging\Flat File Source"
           TopLeft="357.999994665384,90.9999986439943" />
-        <EdgeLayout
-          Id="Package\Extract aircrafts to staging.Paths[Flat File Source Output]"
-          TopLeft="433.599994665384,132.599998643994">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="98.1999991804361,45.399998703599"
-              Start="0,0"
-              End="98.1999991804361,37.899998703599">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.6999993517995" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,18.6999993517995"
-                    Point2="0,22.6999993517995"
-                    Point3="4,22.6999993517995" />
-                  <mssgle:LineSegment
-                    End="94.1999991804361,22.6999993517995" />
-                  <mssgle:CubicBezierSegment
-                    Point1="94.1999991804361,22.6999993517995"
-                    Point2="98.1999991804361,22.6999993517995"
-                    Point3="98.1999991804361,26.6999993517995" />
-                  <mssgle:LineSegment
-                    End="98.1999991804361,37.899998703599" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Extract aircrafts to staging\Row Count"
-          TopLeft="444.285715231482,283.705882104262" />
         <EdgeLayout
           Id="Package\Extract aircrafts to staging.Paths[OLE DB Destination Error Output]"
           TopLeft="531.79999384582,219.599997347593">
@@ -5422,6 +5400,40 @@
             <mssgm:EdgeLabel
               BoundingBox="-84.566045557169,37.0529423783345,146.4178125,11.43359375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Extract aircrafts to staging.Paths[Flat File Source Output]"
+          TopLeft="433.599994665384,132.599998643994">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="98.1999991804361,45.399998703599"
+              Start="0,0"
+              End="98.1999991804361,37.899998703599">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.6999993517995" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.6999993517995"
+                    Point2="0,22.6999993517995"
+                    Point3="4,22.6999993517995" />
+                  <mssgle:LineSegment
+                    End="94.1999991804361,22.6999993517995" />
+                  <mssgle:CubicBezierSegment
+                    Point1="94.1999991804361,22.6999993517995"
+                    Point2="98.1999991804361,22.6999993517995"
+                    Point3="98.1999991804361,26.6999993517995" />
+                  <mssgle:LineSegment
+                    End="98.1999991804361,37.899998703599" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5671,7 +5683,7 @@
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract boarding_passes to staging\Load data to boarding_passes staging table">
+    design-time-name="Package\Extract boarding_passes to staging\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -5684,7 +5696,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract boarding_passes to staging\OLE DB Source">
+    design-time-name="Package\Extract boarding_passes to staging\Load data to boarding_passes staging table">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -5709,6 +5721,10 @@
           Size="242.4,41.6"
           Id="Package\Extract bookings to staging\Load data to bookings staging table"
           TopLeft="331.999995052815,312.999995335937" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Extract bookings to staging\Row Count"
+          TopLeft="344.166661538184,392.499994151294" />
         <EdgeLayout
           Id="Package\Extract bookings to staging.Paths[OLE DB Source Output]"
           TopLeft="377.999995499849,257.599996781349">
@@ -5743,10 +5759,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Extract bookings to staging\Row Count"
-          TopLeft="344.166661538184,392.499994151294" />
         <EdgeLayout
           Id="Package\Extract bookings to staging.Paths[OLE DB Destination Error Output]"
           TopLeft="453.199995052815,354.599995335937">
@@ -5799,7 +5811,7 @@
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract bookings to staging\Load data to bookings staging table">
+    design-time-name="Package\Extract bookings to staging\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -5812,7 +5824,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract bookings to staging\OLE DB Source">
+    design-time-name="Package\Extract bookings to staging\Load data to bookings staging table">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -5915,7 +5927,7 @@
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract flights to staging\Load data to flights staging table">
+    design-time-name="Package\Extract flights to staging\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -5928,7 +5940,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract flights to staging\OLE DB Source">
+    design-time-name="Package\Extract flights to staging\Load data to flights staging table">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -6043,7 +6055,7 @@
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract routes to staging\Load data to routes staging table">
+    design-time-name="Package\Extract routes to staging\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -6056,7 +6068,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract routes to staging\OLE DB Source">
+    design-time-name="Package\Extract routes to staging\Load data to routes staging table">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -6274,7 +6286,7 @@
     </LayoutInfo>
   </DtsEventHandler>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract ticket_flights to staging\Load data to ticket_flights staging table">
+    design-time-name="Package\Extract ticket_flights to staging\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -6287,7 +6299,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Extract ticket_flights to staging\OLE DB Source">
+    design-time-name="Package\Extract ticket_flights to staging\Load data to ticket_flights staging table">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -6304,6 +6316,10 @@
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Extract tickets to staging\Row Count"
+          TopLeft="427.999993622303,297.999995559454" />
         <NodeLayout
           Size="230.4,41.6"
           Id="Package\Extract tickets to staging\Load data to tickets staging table"
@@ -6346,10 +6362,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="129.6,41.6"
-          Id="Package\Extract tickets to staging\Row Count"
-          TopLeft="427.999993622303,297.999995559454" />
         <EdgeLayout
           Id="Package\Extract tickets to staging.Paths[OLE DB Destination Error Output]"
           TopLeft="456.69999499321,246.099997034669">
@@ -6427,17 +6439,5 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
-  <DtsEventHandler
-    design-time-name="Package.EventHandlers[OnError]">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
-        <NodeLayout
-          Size="162.4,41.6"
-          Id="Package.EventHandlers[OnError]\Execute SQL Task"
-          TopLeft="404.99999396503,110.999998345971" />
-      </GraphLayout>
-    </LayoutInfo>
-  </DtsEventHandler>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
